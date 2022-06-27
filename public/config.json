@@ -1,0 +1,68 @@
+{
+    "workflowApiVersion": "1.0",
+    "metaData": {
+        "icon": "images/data.png",
+        "iconSmall": "",
+        "category": "flow"
+    },
+    "type": "REST",
+    "lang": {
+        "en-US": {
+            "name": "Retrive PDF",
+          "description": "Custom Activity for retrive pdf files",
+          "step1Label": "Configure Activity"
+        }
+    },
+    "arguments": {
+        "execute": {
+          "inArguments":[],
+          "outArguments": [],
+          "url": "https://customactivitynext.herokuapp.com/journeybuilder/execute",
+          "verb": "POST",
+          "body": "",
+          "header": "",
+          "format": "json",
+          "useJwt": true,
+          "timeout": 30000
+        }
+    },
+    "configurationArguments": {
+      "applicationExtensionKey": "63e74d65-30eb-4e58-98c0-6d5685de76a9",
+      "save": {
+        "url": "https://customactivitynext.herokuapp.com/journeybuilder/save",
+          "verb": "POST",
+        "useJwt": true
+       },
+       "publish": {
+        "url": "https://customactivitynext.herokuapp.com/journeybuilder/publish",
+           "verb": "POST",
+        "useJwt": true
+       },
+      "stop": {
+        "url": "https://customactivitynext.herokuapp.com/journeybuilder/stop",
+           "verb": "POST",
+        "useJwt": true
+      },
+      "validate": {
+        "url": "https://customactivitynext.herokuapp.com/journeybuilder/validate",
+        "verb": "POST",
+        "useJwt": true
+      }
+    },
+    "wizardSteps": [{ 
+          "label": "Enter Data",
+          "key": "step1"
+        },
+        { 
+          "label": "Check credentials",
+          "key": "step2"
+        }
+    ],
+    "userInterfaces": {
+        "configModal": {
+            "height": 600,
+            "width": 1100,
+          "fullscreen": false
+        }
+    }
+}
