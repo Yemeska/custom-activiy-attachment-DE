@@ -16,6 +16,7 @@ define(['postmonger'], function (Postmonger) {
     var MCClientId = '';
     var MCClientSecret = '';
     var content_builder_folder = '';
+    var eventDefinitionKey = '';
     
     $(window).ready(onRender);
     
@@ -41,7 +42,7 @@ define(['postmonger'], function (Postmonger) {
         if (data) {
             payload = data;
         }
-        cons
+        
         
         var hasInArguments = Boolean(
             payload['arguments'] &&
@@ -88,7 +89,7 @@ define(['postmonger'], function (Postmonger) {
     }
 
     function clickedNext() {
-        /**connection.trigger('nextStep');**/
+        /*connection.trigger('nextStep');*/
         save();
     }
 
