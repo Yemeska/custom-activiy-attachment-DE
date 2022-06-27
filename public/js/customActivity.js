@@ -19,6 +19,7 @@ define(['postmonger'], function (Postmonger) {
     let eventDefinitionKey = '';
     let holderPayloadData = {};
     let activityID = '';
+    let customizationArrayLiterals = {};
     
     $(window).ready(onRender);
     
@@ -187,14 +188,13 @@ define(['postmonger'], function (Postmonger) {
      * @desc anytime Done is clicked on the modal window, save() is called
      */
     function save() {
-        console.log("hit save here")
         user = $('#user').val();
         password = $('#password').val();
         MCClientId = $('#mc_client_id').val();
         MCClientSecret = $('#mc_client_secret').val();
         content_builder_folder = $('#content_builder_folder').val();
         let holderPayloadData = {};
-        console.log("hit save here 2")
+        
         if ( Boolean(user) ) {
             holderPayloadData['user'] = user;
         }
@@ -211,23 +211,13 @@ define(['postmonger'], function (Postmonger) {
             holderPayloadData['content_builder_folder'] = content_builder_folder;
         }
 
-        console.log("hit save here 3")
-
         payload['arguments'].execute.inArguments = [{}];
 
         payload['arguments'].execute.inArguments[0] = holderPayloadData;
 
-        connection.trigger('updateActivity', payload);
-
-        let jsonString = JSON.stringify(holderPayloadData);
-
-        console.log( 'holderPayloadData JSON: ', JSON.stringify(holderPayloadData));
-        console.log( 'jsonstring: ', jsonString);
-        console.log( 'holderPayloadData JSON.parse: ', JSON.parse(jsonString));
- 
-
         payload['metaData'].isConfigured = true;
         console.log('save');
+        console.log(payload);
         connection.trigger('updateActivity', payload);
     }
 });
