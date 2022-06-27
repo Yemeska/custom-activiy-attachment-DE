@@ -17,7 +17,7 @@
         "execute": {
           "inArguments":[],
           "outArguments": [],
-          "url": "https://ferratum..herokuapp.com/journeybuilder/execute",
+          "url": "https://ferratum.herokuapp.com/journeybuilder/execute",
           "verb": "POST",
           "body": "",
           "header": "",
@@ -29,22 +29,22 @@
     "configurationArguments": {
       "applicationExtensionKey": "63e74d65-30eb-4e58-98c0-6d5685de76a9",
       "save": {
-        "url": "https://ferratum..herokuapp.com/journeybuilder/save",
+        "url": "https://ferratum.herokuapp.com/journeybuilder/save",
           "verb": "POST",
         "useJwt": true
        },
        "publish": {
-        "url": "https://ferratum..herokuapp.com/journeybuilder/publish",
+        "url": "https://ferratum.herokuapp.com/journeybuilder/publish",
            "verb": "POST",
         "useJwt": true
        },
       "stop": {
-        "url": "https://ferratum..herokuapp.com/journeybuilder/stop",
+        "url": "https://ferratum.herokuapp.com/journeybuilder/stop",
            "verb": "POST",
         "useJwt": true
       },
       "validate": {
-        "url": "https://ferratum..herokuapp.com/journeybuilder/validate",
+        "url": "https://ferratum.herokuapp.com/journeybuilder/validate",
         "verb": "POST",
         "useJwt": true
       }
