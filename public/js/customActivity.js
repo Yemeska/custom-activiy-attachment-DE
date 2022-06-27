@@ -223,7 +223,7 @@ define(['postmonger'], function (Postmonger) {
 
         console.log( 'holderPayloadData JSON: ', JSON.stringify(holderPayloadData));
         console.log( 'jsonstring: ', jsonString);
-        console.log( 'holderPayloadData JSON.parse: ', JSON.parse(jsonstring));
+        console.log( 'holderPayloadData JSON.parse: ', JSON.parse(jsonString));
  
 
         payload['metaData'].isConfigured = true;
