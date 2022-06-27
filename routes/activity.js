@@ -120,6 +120,10 @@ exports.publish = function (req, res) {
 
 exports.validate = function (req, res) {
 
+    console.log('hit validate');
+    console.log(req);
+    console.log(res);
+
     return res.status(200).json({});
 
     /* JWT(req.body, process.env.jwtSecret_NEXT_PB, (err, decoded) => {
