@@ -11,12 +11,14 @@ define(['postmonger'], function (Postmonger) {
     
     let currentStep = steps[0].key;
 
-    var user = 'test';
-    var password = '';
-    var MCClientId = '';
-    var MCClientSecret = '';
-    var content_builder_folder = '';
-    var eventDefinitionKey = '';
+    let user = '';
+    let password = '';
+    let MCClientId = '';
+    let MCClientSecret = '';
+    let content_builder_folder = '';
+    let eventDefinitionKey = '';
+    let holderPayloadData = {};
+    let activityID = '';
     
     $(window).ready(onRender);
     
@@ -191,7 +193,8 @@ define(['postmonger'], function (Postmonger) {
         MCClientId = $('#mc_client_id').val();
         MCClientSecret = $('#mc_client_secret').val();
         content_builder_folder = $('#content_builder_folder').val();
-        
+        let holderPayloadData = {};
+        console.log("hit save here 2")
         if ( Boolean(user) ) {
             holderPayloadData['user'] = user;
         }
@@ -207,6 +210,8 @@ define(['postmonger'], function (Postmonger) {
         if( Boolean(content_builder_folder) ) {
             holderPayloadData['content_builder_folder'] = content_builder_folder;
         }
+
+        console.log("hit save here 3")
 
         payload['arguments'].execute.inArguments = [{}];
 
