@@ -32,10 +32,10 @@ app.post('/login', routes.login );
 app.post('/logout', routes.logout );
 
 // routes to be called by the journey builder
-app.post('/journeybuilder/save/', activity.save );
-app.post('/journeybuilder/validate/', activity.validate );
-app.post('/journeybuilder/publish/', activity.publish );
-app.post('/journeybuilder/execute/', activity.execute );
+app.post('/journeybuilder/save/', routes.activity.save);
+app.post('/journeybuilder/validate/',routes.activity.validate);
+app.post('/journeybuilder/publish/', routes.activity.publish);
+app.post('/journeybuilder/execute/', routes.activity.execute);
 
 http.createServer(app).listen(app.get('port'), function(){
   console.log('Express server listening on port ' + app.get('port'));
