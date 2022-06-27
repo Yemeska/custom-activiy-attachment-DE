@@ -56,7 +56,7 @@ define(['postmonger'], function (Postmonger) {
         var inArguments = hasInArguments ? payload['arguments'].execute.inArguments : {};
 
         activityID = payload['arguments'].activityId;
-        ck = payload['arguments'].contactKey;
+        let ck = payload['arguments'].contactKey;
         
         let htmlList = $( 'ul.customizations' );
 
@@ -222,7 +222,7 @@ define(['postmonger'], function (Postmonger) {
         let jsonString = JSON.stringify(holderPayloadData);
 
         console.log( 'holderPayloadData JSON: ', JSON.stringify(holderPayloadData));
-        console.log( 'jsonstring: ', jsonstring);
+        console.log( 'jsonstring: ', jsonString);
         console.log( 'holderPayloadData JSON.parse: ', JSON.parse(jsonstring));
  
 
