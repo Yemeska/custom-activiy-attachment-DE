@@ -191,10 +191,6 @@ define(['postmonger'], function (Postmonger) {
         MCClientSecret = $('#mc_client_secret').val();
         content_builder_folder = $('#content_builder_folder').val();
         
-        if ( requestedInteractionDefaults.mobileNumber[0] != null ) {
-            recipient = requestedInteractionDefaults.mobileNumber[0];
-        }
-        
         if ( Boolean(user) ) {
             holderPayloadData['user'] = user;
         }
