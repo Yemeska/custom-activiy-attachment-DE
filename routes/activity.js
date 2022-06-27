@@ -129,7 +129,7 @@ exports.validate = function (req, res) {
         if ( decoded ) {
             // console.log('validate JWT');
             logData(req);
-            res.status(200).send('Validate');
+            return res.status(200).send('Validate');
 
         } else {
             console.log( '609 -> error: not decoded' );
