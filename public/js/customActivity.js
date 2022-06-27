@@ -217,7 +217,8 @@ define(['postmonger'], function (Postmonger) {
 
         payload['metaData'].isConfigured = true;
         console.log('save');
-        console.log(payload['arguments']);
+        let test = payload['arguments'];
+        console.log(test);
         connection.trigger('updateActivity', payload);
     }
 });
