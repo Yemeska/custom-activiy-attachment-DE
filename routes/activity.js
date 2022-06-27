@@ -93,6 +93,21 @@ exports.save = function (req, res) {
 };
 
 exports.execute = function (req, res) {
+    JWT(req.body, process.env.jwtSecret_NEXT_PB, (err, decoded) => {
+        // console.log( '388 -> error: ', err );
+        if ( err ) {
+            console.log('390 -> FAILED', err);
+            console.error( err );
+            return res.status(401).end();
+        }
+        if ( decoded && decoded.inArguments && decoded.inArguments.length > 0 ) {
+            res.status(200).json( {success: 'true'} );
+        } else {
+            console.log('564 -> FAILED');
+            console.error('inArguments invalid.');
+            return res.status(400).end();
+        }
+    });
 };
 
 exports.publish = function (req, res) {

@@ -30,17 +30,17 @@
       "applicationExtensionKey": "63e74d65-30eb-4e58-98c0-6d5685de76a9",
       "save": {
         "url": "https://ferratum.herokuapp.com/journeybuilder/save",
-          "verb": "POST",
+        "verb": "POST",
         "useJwt": true
        },
        "publish": {
         "url": "https://ferratum.herokuapp.com/journeybuilder/publish",
-           "verb": "POST",
+        "verb": "POST",
         "useJwt": true
        },
       "stop": {
         "url": "https://ferratum.herokuapp.com/journeybuilder/stop",
-           "verb": "POST",
+        "verb": "POST",
         "useJwt": true
       },
       "validate": {
