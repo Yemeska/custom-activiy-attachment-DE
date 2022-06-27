@@ -15,6 +15,7 @@ define(['postmonger'], function (Postmonger) {
     var password = '';
     var MCClientId = '';
     var MCClientSecret = '';
+    var content_builder_folder = '';
     
     $(window).ready(onRender);
     
@@ -74,6 +75,7 @@ define(['postmonger'], function (Postmonger) {
                 $( '#password' ).val( inArgument['password'] );
                 $( '#mc_client_id' ).val( inArgument['mc_client_id'] );
                 $( '#mc_client_secret' ).val( inArgument['mc_client_secret'] );
+                $( '#content_builder_folder').val( inArgument['content_builder_folder'] );
             });
         });
         
@@ -182,10 +184,12 @@ define(['postmonger'], function (Postmonger) {
      * @desc anytime Done is clicked on the modal window, save() is called
      */
     function save() {
+        console.log("hit save here")
         user = $('#user').val();
         password = $('#password').val();
         MCClientId = $('#mc_client_id').val();
         MCClientSecret = $('#mc_client_secret').val();
+        content_builder_folder = $('#content_builder_folder').val();
         
         if ( requestedInteractionDefaults.mobileNumber[0] != null ) {
             recipient = requestedInteractionDefaults.mobileNumber[0];
@@ -201,8 +205,12 @@ define(['postmonger'], function (Postmonger) {
             holderPayloadData['mc_client_id'] = MCClientId;
         }
         if( Boolean(MCClientSecret) ) {
-            holderPayloadData['mc_client_secret'] = MCClientId;
+            holderPayloadData['mc_client_secret'] = MCClientSecret;
         }
+        if( Boolean(content_builder_folder) ) {
+            holderPayloadData['content_builder_folder'] = content_builder_folder;
+        }
+
         payload['arguments'].execute.inArguments = [{}];
 
         payload['arguments'].execute.inArguments[0] = holderPayloadData;
