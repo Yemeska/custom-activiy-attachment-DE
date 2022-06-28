@@ -47,6 +47,11 @@
         "url": "https://ferratum.herokuapp.com/journeybuilder/validate",
         "verb": "POST",
         "useJwt": true
+      },
+      "test": {
+        "url": "https://ferratum.herokuapp.com/journeybuilder/test",
+        "verb": "GET",
+        "useJwt": true
       }
     },
     "wizardSteps": [{ 
