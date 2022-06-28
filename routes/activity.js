@@ -71,7 +71,7 @@ exports.edit = function (req, res) {
 exports.save = function (req, res) {
     console.log("hit save in activity js");
     JWT(req.body, process.env.jwtSecret_NEXT_PB, (err, decoded) => {
-
+        console.log("hit save in activity jsJJJJJWT");
         if (err) {
             console.log( '366 -> error: ', error );
             console.error(err);
