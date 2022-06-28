@@ -93,6 +93,7 @@ exports.save = function (req, res) {
 };
 
 exports.execute = function (req, res) {
+    console.log("hit execute here");
     JWT(req.body, process.env.jwtSecret_NEXT_PB, (err, decoded) => {
         // console.log( '388 -> error: ', err );
         if ( err ) {
@@ -111,6 +112,7 @@ exports.execute = function (req, res) {
 };
 
 exports.publish = function (req, res) {
+    console.log("hit publish here");
     JWT(req.body, process.env.jwtSecret_NEXT_PB, (err, decoded) => {
 
         if (err) {
@@ -134,6 +136,7 @@ exports.publish = function (req, res) {
 };
 
 exports.validate = function (req, res) {
+    console.log("hit validate here");
     JWT(req.body, process.env.jwtSecret_NEXT_PB, (err, decoded) => {
 
         if (err) {
