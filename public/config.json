@@ -8,7 +8,7 @@
     "type": "REST",
     "lang": {
         "en-US": {
-            "name": "Retrive PDF",
+            "name": "Retrieve PDF",
           "description": "Custom Activity for retrive pdf files",
           "step1Label": "Configure Activity"
         }
@@ -27,7 +27,7 @@
         }
     },
     "configurationArguments": {
-      "applicationExtensionKey": "a2b06bd8-3f3d-49d3-b99e-2d6d75cd4067",
+      "applicationExtensionKey": "d8ab3547-fb1f-4179-81ef-528f8ea8b416",
       "save": {
         "url": "https://ferratum.herokuapp.com/journeybuilder/save",
         "verb": "POST",
