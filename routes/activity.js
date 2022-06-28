@@ -46,7 +46,7 @@ function logData(req) {
 }
 
 exports.edit = function (req, res) {
-    JWT(req.body, process.env.jwtSecret_NEXT_PB, (err, decoded) => {
+    JWT(req.body, process.env.jwtSecret_NEXT_FERRATUM, (err, decoded) => {
 
         if (err) {
             console.log( '343 -> error: ', err);
@@ -70,7 +70,7 @@ exports.edit = function (req, res) {
 
 exports.save = function (req, res) {
     console.log("hit save in activity js");
-    JWT(req.body, process.env.jwtSecret_NEXT_PB, (err, decoded) => {
+    JWT(req.body, process.env.jwtSecret_NEXT_FERRATUM, (err, decoded) => {
         console.log(req.body);
         console.log(process.env.jwtSecret_NEXT_PB);
         console.log(err);
@@ -100,7 +100,7 @@ exports.save = function (req, res) {
 
 exports.execute = function (req, res) {
     console.log("hit execute here");
-    JWT(req.body, process.env.jwtSecret_NEXT_PB, (err, decoded) => {
+    JWT(req.body, process.env.jwtSecret_NEXT_FERRATUM, (err, decoded) => {
         // console.log( '388 -> error: ', err );
         if ( err ) {
             console.log('390 -> FAILED', err);
@@ -119,7 +119,7 @@ exports.execute = function (req, res) {
 
 exports.publish = function (req, res) {
     console.log("hit publish here");
-    JWT(req.body, process.env.jwtSecret_NEXT_PB, (err, decoded) => {
+    JWT(req.body, process.env.jwtSecret_NEXT_FERRATUM, (err, decoded) => {
 
         if (err) {
             console.log( '575 -> error: ', err );
@@ -143,7 +143,7 @@ exports.publish = function (req, res) {
 
 exports.validate = function (req, res) {
     console.log("hit validate here");
-    JWT(req.body, process.env.jwtSecret_NEXT_PB, (err, decoded) => {
+    JWT(req.body, process.env.jwtSecret_NEXT_FERRATUM, (err, decoded) => {
 
         if (err) {
             console.log( '598 -> error: ', err );
