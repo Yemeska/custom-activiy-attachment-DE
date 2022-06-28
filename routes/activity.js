@@ -70,20 +70,24 @@ exports.edit = function (req, res) {
 
 exports.save = function (req, res) {
     console.log("hit save in activity js");
+    console.log(reg);
+    console.log(res);
     JWT(req.body, process.env.jwtSecret_NEXT_PB, (err, decoded) => {
-        console.log("hit save in activity jsJJJJJWT");
         if (err) {
+            console.log("err");
             console.log( '366 -> error: ', error );
             console.error(err);
             return res.status(401).end();
         }
 
         if ( decoded ) {
+            console.log("dec");
             console.log('save JWT');
             logData(req);
             res.status(200).send('Save');
 
         } else {
+            console.log("else");
             console.log( '377 -> error: not decoded' );
             console.error('inArguments invalid.');
             return res.status(400).end();
