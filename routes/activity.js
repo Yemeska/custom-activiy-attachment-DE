@@ -155,3 +155,7 @@ exports.validate = function (req, res) {
 
     });
 };
+
+exports.test = function (req, res) {
+    es.status(200).send('Validate test');
+};
