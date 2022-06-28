@@ -122,7 +122,7 @@ exports.publish = function (req, res) {
         if ( decoded ) {
             // console.log('publish JWT');
             logData(req);
-            res.status(200).send('Publish');
+            return res.status(200).send('Publish');
 
         } else {
             console.log( '586 -> error: not decoded' );
@@ -145,7 +145,7 @@ exports.validate = function (req, res) {
         if ( decoded ) {
             // console.log('validate JWT');
             logData(req);
-            res.status(200).send('Validate');
+            return res.status(200).json({success: true});
 
         } else {
             console.log( '609 -> error: not decoded' );
