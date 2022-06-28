@@ -27,7 +27,7 @@
         }
     },
     "configurationArguments": {
-      "applicationExtensionKey": "63e74d65-30eb-4e58-98c0-6d5685de76a9",
+      "applicationExtensionKey": "a2b06bd8-3f3d-49d3-b99e-2d6d75cd4067",
       "save": {
         "url": "https://ferratum.herokuapp.com/journeybuilder/save",
         "verb": "POST",
@@ -46,11 +46,6 @@
       "validate": {
         "url": "https://ferratum.herokuapp.com/journeybuilder/validate",
         "verb": "POST",
-        "useJwt": true
-      },
-      "test": {
-        "url": "https://ferratum.herokuapp.com/journeybuilder/test",
-        "verb": "GET",
         "useJwt": true
       }
     },
