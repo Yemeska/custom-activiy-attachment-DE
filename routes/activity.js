@@ -70,9 +70,10 @@ exports.edit = function (req, res) {
 
 exports.save = function (req, res) {
     console.log("hit save in activity js");
-    console.log(reg);
+    console.log(req);
     console.log(res);
-    JWT(req.body, process.env.jwtSecret_NEXT_PB, (err, decoded) => {
+    res.status(200).send('Save');
+    /*JWT(req.body, process.env.jwtSecret_NEXT_PB, (err, decoded) => {
         if (err) {
             console.log("err");
             console.log( '366 -> error: ', error );
@@ -93,7 +94,7 @@ exports.save = function (req, res) {
             return res.status(400).end();
         }
 
-    });
+    });*/
 };
 
 exports.execute = function (req, res) {
