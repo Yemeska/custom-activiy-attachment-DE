@@ -99,6 +99,8 @@ exports.execute = function (req, res) {
             let decodedArgs = decoded.inArguments[0];
 
             console.log(decodedArgs);
+            console.log("second");
+            console.log(decoded);
 
 
             res.status(200).json( {success: 'true'} );
