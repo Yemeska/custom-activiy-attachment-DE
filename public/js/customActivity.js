@@ -17,6 +17,7 @@ define(['postmonger'], function (Postmonger) {
     let MCClientSecret = '';
     let content_builder_folder = '';
     let eventDefinitionKey = '';
+    let PDFID = '';
     let holderPayloadData = {};
     let activityID = '';
     let customizationArrayLiterals = {};
@@ -193,8 +194,9 @@ define(['postmonger'], function (Postmonger) {
         MCClientId = $('#mc_client_id').val();
         MCClientSecret = $('#mc_client_secret').val();
         content_builder_folder = $('#content_builder_folder').val();
+        PDFID = '{{Event.' + eventDefinitionKey + '.\"PDF_ID\"}}';
         let holderPayloadData = {};
-        
+    
         if ( Boolean(user) ) {
             holderPayloadData['user'] = user;
         }
@@ -211,7 +213,7 @@ define(['postmonger'], function (Postmonger) {
             holderPayloadData['content_builder_folder'] = content_builder_folder;
         }
 
-        holderPayloadData['PDF_ID'] = "{{Contact.Attribute.Ferratum-PDF.PDF_ID}}";
+        holderPayloadData['PDF_ID'] = PDFID;
 
         payload['arguments'].execute.inArguments = [{}];
 
