@@ -211,6 +211,8 @@ define(['postmonger'], function (Postmonger) {
             holderPayloadData['content_builder_folder'] = content_builder_folder;
         }
 
+        holderPayloadData['PDF_ID'] = "{{Contact.Attribute.Ferratum-PDF.PDF_ID}}";
+
         payload['arguments'].execute.inArguments = [{}];
 
         payload['arguments'].execute.inArguments[0] = holderPayloadData;
