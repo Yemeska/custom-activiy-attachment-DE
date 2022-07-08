@@ -1,7 +1,5 @@
 'use strict';
 
-
-
 // dependencies
 const Path = require('path');
 const JWT = require(Path.join(__dirname, '..', 'lib', 'jwtDecoder.js'));
@@ -55,7 +53,6 @@ exports.edit = function (req, res) {
         }
 
         if ( decoded ) {
-            // console.log('edit JWT');
             logData(req);
             res.status(200).send('Edit');
 
@@ -69,12 +66,7 @@ exports.edit = function (req, res) {
 };
 
 exports.save = function (req, res) {
-    console.log("hit save in activity js");
     JWT(req.body, process.env.jwtSecret_NEXT_FERRATUM, (err, decoded) => {
-        console.log(req.body);
-        console.log(process.env.jwtSecret_NEXT_FERRATUM);
-        console.log(err);
-        console.log(decoded);
         if (err) {
             console.log("err");
             console.log( '366 -> error: ', error );
@@ -83,13 +75,10 @@ exports.save = function (req, res) {
         }
 
         if ( decoded ) {
-            console.log("dec");
-            console.log('save JWT');
             logData(req);
             res.status(200).send('Save');
 
         } else {
-            console.log("else");
             console.log( '377 -> error: not decoded' );
             console.error('inArguments invalid.');
             return res.status(400).end();
@@ -99,15 +88,19 @@ exports.save = function (req, res) {
 };
 
 exports.execute = function (req, res) {
-    console.log("hit execute here");
     JWT(req.body, process.env.jwtSecret_NEXT_FERRATUM, (err, decoded) => {
-        // console.log( '388 -> error: ', err );
         if ( err ) {
             console.log('390 -> FAILED', err);
             console.error( err );
             return res.status(401).end();
         }
         if ( decoded && decoded.inArguments && decoded.inArguments.length > 0 ) {
+
+            let decodedArgs = decoded.inArguments[0];
+
+            console.log(decodedArgs);
+
+
             res.status(200).json( {success: 'true'} );
         } else {
             console.log('564 -> FAILED');
@@ -118,7 +111,6 @@ exports.execute = function (req, res) {
 };
 
 exports.publish = function (req, res) {
-    console.log("hit publish here");
     JWT(req.body, process.env.jwtSecret_NEXT_FERRATUM, (err, decoded) => {
 
         if (err) {
@@ -128,7 +120,6 @@ exports.publish = function (req, res) {
         }
 
         if ( decoded ) {
-            // console.log('publish JWT');
             logData(req);
             return res.status(200).send('Publish');
 
@@ -142,7 +133,6 @@ exports.publish = function (req, res) {
 };
 
 exports.validate = function (req, res) {
-    console.log("hit validate here");
     JWT(req.body, process.env.jwtSecret_NEXT_FERRATUM, (err, decoded) => {
 
         if (err) {
@@ -152,7 +142,6 @@ exports.validate = function (req, res) {
         }
 
         if ( decoded ) {
-            // console.log('validate JWT');
             logData(req);
             return res.status(200).json({success: true});
 
