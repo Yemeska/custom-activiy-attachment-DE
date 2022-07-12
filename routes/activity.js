@@ -14,6 +14,10 @@ const queryst = require('querystring');
 const textEncoder = require('text-encoding');
 const text = new textEncoder.TextEncoder();
 
+const mc_id = '';
+const mc_secret = '';
+const mc_auth = 'https://mcf3lgm9bdfv0wpxc7ptkspjwc9y.auth.marketingcloudapis.com/v1/requestToken';
+
 let contactCounter = 0;
 
 
@@ -98,10 +102,28 @@ exports.execute = function (req, res) {
 
             let decodedArgs = decoded.inArguments[0];
 
-            console.log(decodedArgs);
-            console.log("second");
-            console.log(decoded);
+            mc_id = decodedArgs.mc_client_id;
+            mc_secret = decodedArgs.mc_client_secret;
 
+            let cre = {
+                mc_id,
+                mc_secret
+            }
+
+            console.log(mc_id);
+            console.log(mc_secret);
+
+            let response = await fetch(mc_auth, {
+                method: 'POST',
+                headers: {
+                  'Content-Type': 'application/json'
+                },
+                body: JSON.stringify(cre)
+              });
+
+              let result = await response.json();
+
+              console.log(result);
 
             res.status(200).json( {success: 'true'} );
         } else {
