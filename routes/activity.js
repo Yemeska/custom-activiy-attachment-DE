@@ -110,6 +110,18 @@ exports.execute = function (req, res) {
                 mc_secret
             }
 
+            let response = await fetch(mc_auth, {
+                method: 'POST',
+                headers: {
+                  'Content-Type': 'application/json'
+                },
+                body: JSON.stringify(cre)
+              });
+
+              let result = await response.json();
+
+              console.log(result);
+
             console.log(mc_id);
             console.log(mc_secret);
 
