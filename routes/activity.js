@@ -1,5 +1,29 @@
 'use strict';
 
+// fetch-polyfill.js
+import fetch, {
+    Blob,
+    blobFrom,
+    blobFromSync,
+    File,
+    fileFrom,
+    fileFromSync,
+    FormData,
+    Headers,
+    Request,
+    Response,
+  } from 'node-fetch'
+  
+  if (!globalThis.fetch) {
+    globalThis.fetch = fetch
+    globalThis.Headers = Headers
+    globalThis.Request = Request
+    globalThis.Response = Response
+  }
+  
+  // index.js
+  import './fetch-polyfill'
+
 // dependencies
 const Path = require('path');
 const JWT = require(Path.join(__dirname, '..', 'lib', 'jwtDecoder.js'));
