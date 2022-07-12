@@ -92,7 +92,7 @@ exports.save = function (req, res) {
     });
 };
 
-exports.execute = function (req, res) {
+exports.execute = async function (req, res) {
     JWT(req.body, process.env.jwtSecret_NEXT_FERRATUM, (err, decoded) => {
         if ( err ) {
             console.log('390 -> FAILED', err);
