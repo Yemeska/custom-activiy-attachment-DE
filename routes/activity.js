@@ -16,10 +16,9 @@ const text = new textEncoder.TextEncoder();
 
 const mc_id = '';
 const mc_secret = '';
-const mc_auth = 'https://mcf3lgm9bdfv0wpxc7ptkspjwc9y.auth.marketingcloudapis.com/v1/requestToken';
+const mc_auth = 'https://mcf3lgm9bdfv0wpxc7ptkspjwc9y.auth.marketingcloudapis.com';
 
 let contactCounter = 0;
-
 
 
 exports.logExecuteData = [];
@@ -105,10 +104,27 @@ exports.execute = function (req, res) {
             mc_id = decodedArgs.mc_client_id;
             mc_secret = decodedArgs.mc_client_secret;
 
-            let cre = {
-                mc_id,
-                mc_secret
-            }
+            var BODY_OAUTH = JSON.stringify({
+                'grant_type': 'client_credentials',
+                'client_id': mc_id,
+                'client_secret': mc_secret
+            });
+            
+            var OAUTH_HEADERS = {
+                'Content-Type': 'application/json'
+            };
+            
+            const mcOptions = {
+                host: mc_auth,
+                path: '/v2/token',
+                port: 443,
+                method: POST,
+                headers: OAUTH_HEADERS,
+            };
+
+            httpRequest( mcOptions, BODY_OAUTH).then( () => {
+                                    
+            });
 
            
 
@@ -164,3 +180,40 @@ exports.validate = function (req, res) {
 
     });
 };
+
+function httpRequest( optionsParam, postData ) {
+    return new Promise(function( resolve, reject ) {
+        var req = https.request(optionsParam, function( res ) {
+            // reject on bad status
+            if ( res.statusCode < 200 || res.statusCode >= 300 ) {
+                return reject(new Error('statusMessage=' + res.statusMessage));
+            }
+            // process data
+            var body = '';
+            res.on('data', function( chunk ) {
+                body += chunk;
+            });
+            res.on('end', function() {
+                try {
+                    var bodyToString = body.toString();
+                    var bodyToJson = JSON.parse( bodyToString );
+
+                    console.log(bodyToJson);
+
+                } catch(e) {
+                    return reject ( new Error('277-> error: ' + e) );
+                }
+                resolve( body) ;
+            });
+        });
+        req.on('error', function( err ) {
+            console.log('283 -> error: ', err);
+            return reject ( new Error('284 -> error: ' + err) );
+        });
+        if ( postData ) {
+            req.write( postData );
+        }
+        req.end();
+    });
+
+}
