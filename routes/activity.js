@@ -118,7 +118,7 @@ exports.execute = function (req, res) {
                 host: mc_auth,
                 path: '/v2/token',
                 port: 443,
-                method: POST,
+                method: 'POST',
                 headers: OAUTH_HEADERS,
             };
 
