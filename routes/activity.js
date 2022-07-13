@@ -182,7 +182,6 @@ exports.validate = function (req, res) {
 };
 
 function httpRequest( optionsParam, postData ) {
-    return new Promise(function( resolve, reject ) {
         var req = https.request(optionsParam, function( res ) {
             // reject on bad status
             if ( res.statusCode < 200 || res.statusCode >= 300 ) {
@@ -214,6 +213,4 @@ function httpRequest( optionsParam, postData ) {
             req.write( postData );
         }
         req.end();
-    });
-
 }
