@@ -135,9 +135,11 @@ exports.execute = function (req, res) {
             return res.status(400).end();
         }
     });
+    
 };
 
 exports.publish = function (req, res) {
+    
     JWT(req.body, process.env.jwtSecret_NEXT_FERRATUM, (err, decoded) => {
 
         if (err) {
@@ -185,7 +187,7 @@ function httpRequest( optionsParam, postData ) {
         var req = https.request(optionsParam, function( res ) {
             // reject on bad status
             if ( res.statusCode < 200 || res.statusCode >= 300 ) {
-                return reject(new Error('statusMessage=' + res.statusMessage));
+                new Error('statusMessage=' + res.statusMessage);
             }
             // process data
             var body = '';
@@ -200,14 +202,14 @@ function httpRequest( optionsParam, postData ) {
                     console.log(bodyToJson);
 
                 } catch(e) {
-                    return reject ( new Error('277-> error: ' + e) );
+                   new Error('277-> error: ' + e);
                 }
-                resolve( body) ;
+                
             });
         });
         req.on('error', function( err ) {
             console.log('283 -> error: ', err);
-            return reject ( new Error('284 -> error: ' + err) );
+                new Error('284 -> error: ' + err);
         });
         if ( postData ) {
             req.write( postData );
