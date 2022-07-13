@@ -16,7 +16,7 @@ const text = new textEncoder.TextEncoder();
 
 let mc_id = '';
 let mc_secret = '';
-const mc_auth = 'https://mcf3lgm9bdfv0wpxc7ptkspjwc9y.auth.marketingcloudapis.com/v2/token';
+const mc_auth = 'https://mcf3lgm9bdfv0wpxc7ptkspjwc9y.auth.marketingcloudapis.com';
 
 let contactCounter = 0;
 
@@ -116,9 +116,10 @@ exports.execute = function (req, res) {
             
             var mcOptions = {
                 host: mc_auth,
+                path: '/v2/token',
                 port: 443,
                 method: 'POST',
-                headers: OAUTH_HEADERS,
+                headers: OAUTH_HEADERS
             };
 
             console.log('begore request');
