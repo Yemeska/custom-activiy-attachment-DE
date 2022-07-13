@@ -13,7 +13,7 @@ const request = require('request');
 const queryst = require('querystring');
 const textEncoder = require('text-encoding');
 const text = new textEncoder.TextEncoder();
-var fetch = require('node-fetch');
+const fetch = (...args) => import('node-fetch').then(({default: fetch}) => fetch(...args));
 
 const mc_id = '';
 const mc_secret = '';
