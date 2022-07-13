@@ -28,12 +28,13 @@
     "errorhandler": "^1.5.0",
     "express": "^4.15.4",
     "jsonwebtoken": "^8.0.1",
+    "node-cache": "^5.1.2",
+    "node-fetch": "^2.6.7",
+    "nodemailer": "^6.4.13",
     "request": "^2.81.0",
     "request-promise": "^4.2.6",
     "require": "^2.4.20",
     "text-encoding": "^0.7.0",
-    "text-encoding-utf-8": "^1.0.2",
-    "node-cache": "^5.1.2",
-    "nodemailer": "^6.4.13"
+    "text-encoding-utf-8": "^1.0.2"
   }
 }
