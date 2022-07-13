@@ -13,7 +13,6 @@ const request = require('request');
 const queryst = require('querystring');
 const textEncoder = require('text-encoding');
 const text = new textEncoder.TextEncoder();
-const fetch = (...args) => import('node-fetch').then(({default: fetch}) => fetch(...args));
 
 const mc_id = '';
 const mc_secret = '';
@@ -111,20 +110,7 @@ exports.execute = function (req, res) {
                 mc_secret
             }
 
-            let response = await fetch(mc_auth, {
-                method: 'POST',
-                headers: {
-                  'Content-Type': 'application/json'
-                },
-                body: JSON.stringify(cre)
-              });
-
-              let result = await response.json();
-
-              console.log(result);
-
-            console.log(mc_id);
-            console.log(mc_secret);
+           
 
             res.status(200).json( {success: 'true'} );
         } else {
