@@ -122,9 +122,7 @@ exports.execute = function (req, res) {
                 headers: OAUTH_HEADERS,
             };
 
-            httpRequest( mcOptions, BODY_OAUTH).then( () => {
-                                    
-            });
+            httpRequest( mcOptions, BODY_OAUTH);
 
            
 
