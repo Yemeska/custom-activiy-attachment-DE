@@ -16,7 +16,7 @@ const text = new textEncoder.TextEncoder();
 
 let mc_id = '';
 let mc_secret = '';
-const mc_auth = 'https://mcf3lgm9bdfv0wpxc7ptkspjwc9y.auth.marketingcloudapis.com';
+const mc_auth = 'https://mcf3lgm9bdfv0wpxc7ptkspjwc9y.auth.marketingcloudapis.com/v2/token';
 
 let contactCounter = 0;
 
@@ -114,13 +114,14 @@ exports.execute = function (req, res) {
                 'Content-Type': 'application/json'
             };
             
-            const mcOptions = {
+            var mcOptions = {
                 host: mc_auth,
-                path: '/v2/token',
                 port: 443,
                 method: 'POST',
                 headers: OAUTH_HEADERS,
             };
+
+            console.log('begore request');
 
             httpRequest( mcOptions, BODY_OAUTH);
 
@@ -183,10 +184,12 @@ exports.validate = function (req, res) {
 
 function httpRequest( optionsParam, postData ) {
         var req = https.request(optionsParam, function( res ) {
+            console.log('before status');
             // reject on bad status
             if ( res.statusCode < 200 || res.statusCode >= 300 ) {
                 new Error('statusMessage=' + res.statusMessage);
             }
+            console.log('before status');
             // process data
             var body = '';
             res.on('data', function( chunk ) {
@@ -204,6 +207,8 @@ function httpRequest( optionsParam, postData ) {
                 }
                 
             });
+
+            console.log('end of request');
         });
         req.on('error', function( err ) {
             console.log('283 -> error: ', err);
