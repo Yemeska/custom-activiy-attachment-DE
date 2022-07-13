@@ -16,7 +16,7 @@ const text = new textEncoder.TextEncoder();
 
 let mc_id = '';
 let mc_secret = '';
-const mc_auth = 'https://mcf3lgm9bdfv0wpxc7ptkspjwc9y.auth.marketingcloudapis.com';
+const mc_auth = 'mcf3lgm9bdfv0wpxc7ptkspjwc9y.auth.marketingcloudapis.com';
 
 let contactCounter = 0;
 
