@@ -14,8 +14,8 @@ const queryst = require('querystring');
 const textEncoder = require('text-encoding');
 const text = new textEncoder.TextEncoder();
 
-const mc_id = '';
-const mc_secret = '';
+let mc_id = '';
+let mc_secret = '';
 const mc_auth = 'https://mcf3lgm9bdfv0wpxc7ptkspjwc9y.auth.marketingcloudapis.com';
 
 let contactCounter = 0;
