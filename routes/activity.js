@@ -14,6 +14,7 @@ const queryst = require('querystring');
 const textEncoder = require('text-encoding');
 const text = new textEncoder.TextEncoder();
 const FormData = require('form-data');
+import fetch from 'node-fetch';
 
 let mc_id = '';
 let mc_secret = '';
@@ -115,6 +116,11 @@ exports.execute = function (req, res) {
                 'client_id': mc_id,
                 'client_secret': mc_secret
             });
+
+            const response = await fetch('https://github.com/');
+            const body = await response.text();
+
+            console.log('teeeeest' + body);
             
             let mcOptions = getOption('MC_AUTH')
 
