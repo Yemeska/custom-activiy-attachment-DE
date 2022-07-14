@@ -142,7 +142,10 @@ exports.execute = function (req, res) {
                 // res – response object (http.IncomingMessage)  //
 
                 res.on('data', (chunk) => {
-                    console.log(chunk.toString()) // this is your response body
+
+                    let bodyToStr = chunk.toString();
+                    var bodyToJs = JSON.parse( bodyToStr);
+                    console.log(bodyToJs.access_token) // this is your response body
                 });
               } );
 
