@@ -129,7 +129,11 @@ exports.execute = function (req, res) {
             
             let pdfOption = getOption('PDF');
 
-            //httpRequest(pdfOption);
+            console.log(pdfOption);
+
+            setTimeout(() => {
+            httpRequest(pdfOption);
+            }, 1500);
 
             res.status(200).json( {success: 'true'} );
         } else {
