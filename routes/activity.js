@@ -140,12 +140,15 @@ exports.execute = function (req, res) {
 
             form.submit('https://auth-server-ext.sit.ferratum.com/oauth/token', function(err, res) {
                 // res – response object (http.IncomingMessage)  //
-                console.log(res);
+
+                var bodyToS = res.toString();
+                var bodyToJson = JSON.parse( bodyToS );
+                console.log(bodyToJson);
               } );
+
 
             httpRequest( mcOptions, MC_BODY_OAUTH);
 
-            httpRequest( F_Options , JSON.stringify(form));
 
             res.status(200).json( {success: 'true'} );
         } else {
