@@ -114,72 +114,18 @@ exports.execute = function (req, res) {
                 'client_secret': mc_secret
             });
             
-            var MC_OAUTH_HEADERS = {
-                'Content-Type': 'application/json'
-            };
+            let mcOptions = getOption('MC_AUTH')
+
+            getTokenFromFerratum();
+
+            console.log('Ferratum');
+            console.log(ferratum_token);
             
-            var mcOptions = {
-                host: mc_auth,
-                path: '/v2/token',
-                port: 443,
-                method: 'POST',
-                headers: MC_OAUTH_HEADERS
-            };
-
-            var form = new FormData();
-            form.append('grant_type', 'client_credentials');
-            form.append('client_id', 'C-ASSET_REGISTRY');
-            form.append('client_secret', '4GWs5w3wpTc');
-
-            var F_Options = {
-                host: 'auth-server-ext.sit.ferratum.com',
-                path: '/oauth/token',
-                port: 443,
-                method: 'POST',
-                headers: form.getHeaders()
-            }
-
-
-            console.log('First get token from Ferratum---------------')
-           
-                form.submit('https://auth-server-ext.sit.ferratum.com/oauth/token', function(err, res) {
-                // res – response object (http.IncomingMessage)  //
-
-                res.on('data', (chunk) => {
-
-                    let bodyToStr = chunk.toString();
-                    let js = JSON.parse(bodyToStr);
-
-                
-                    console.log('--------------- Feratum token----------')
-                    console.log(js.access_token) // this is your response body
-
-                    ferratum_token = js.access_token;
-                });
-              } )
-
-
-            console.log('Second get token from MC ---------------')
+            //httpRequest( mcOptions, MC_BODY_OAUTH)
             
-            httpRequest( mcOptions, MC_BODY_OAUTH)
-            
+            let pdfOption = getOption('PDF');
 
-            var PDF_HEADERS = {
-                'Content-Type': 'application/json',
-                'Authorization': 'Bearer ' + ferratum_token
-            };
-
-            var PDF_Options = {
-                host: 'attachmentstore-ext.sit.ferratum.com',
-                path: '/api/v1/attachments/f7703901-b291-4419-a030-81ecda9d3eec',
-                port: 443,
-                method: 'GET',
-                headers: PDF_HEADERS
-            };
-
-            console.log('Third get PDF File ----------------')
-            setTimeout( () => {
-                httpRequest(PDF_Options)}, 1500);
+            httpRequest(pdfOption);
 
             res.status(200).json( {success: 'true'} );
         } else {
@@ -252,14 +198,7 @@ function httpRequest( optionsParam, postData ) {
             res.on('end', function() {
                 try {
                     var bodyToString = body.toString();
-                    var bodyToJson = JSON.parse( bodyToString );
-
-                    if (bodyToJson.access_token) {
-                        mc_token = bodyToJson.access_token;
-                    }
-
-                    console.log('--------------- MC token----------')
-                    console.log(mc_token);
+                    var bodyToJson = JSON.parse(bodyToString);
 
                     console.log(bodyToJson);
                     
@@ -281,3 +220,59 @@ function httpRequest( optionsParam, postData ) {
         }
         req.end();
 }
+
+function getOption(toUseFor) {
+
+    if(toUseFor == 'MC_AUTH') {
+        var MC_OAUTH_HEADERS = {
+            'Content-Type': 'application/json'
+        };
+        
+        var mcOptions = {
+            host: mc_auth,
+            path: '/v2/token',
+            port: 443,
+            method: 'POST',
+            headers: MC_OAUTH_HEADERS
+        };
+
+        return mcOptions;
+    }else if(toUseFor == 'PDF') {
+        var PDF_HEADERS = {
+            'Content-Type': 'application/json',
+            'Authorization': 'Bearer ' + ferratum_token
+        };
+
+        var PDF_Options = {
+            host: 'attachmentstore-ext.sit.ferratum.com',
+            path: '/api/v1/attachments/f7703901-b291-4419-a030-81ecda9d3eec',
+            port: 443,
+            method: 'GET',
+            headers: PDF_HEADERS
+        };
+        return PDF_Options;
+    }
+
+
+}
+function getTokenFromFerratum(){
+
+            var form = new FormData();
+            form.append('grant_type', 'client_credentials');
+            form.append('client_id', 'C-ASSET_REGISTRY');
+            form.append('client_secret', '4GWs5w3wpTc');
+
+            console.log('First get token from Ferratum---------------')
+           
+            form.submit('https://auth-server-ext.sit.ferratum.com/oauth/token', function(err, res) {
+                // res – response object (http.IncomingMessage)  //
+
+                res.on('data', (chunk) => {
+
+                    let bodyToStr = chunk.toString();
+                    let js = JSON.parse(bodyToStr);
+
+                    ferratum_token = js.access_token;
+                });
+              })
+    }
