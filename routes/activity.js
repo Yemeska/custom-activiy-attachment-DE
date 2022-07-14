@@ -138,14 +138,10 @@ exports.execute = function (req, res) {
                 headers: form.getHeaders()
             }
 
-            var request = https.request(F_Options);
-            
-
-            form.pipe(request);
-
-            request.on('response', function(res) {
+            form.submit('https://auth-server-ext.sit.ferratum.com/oauth/token', function(err, res) {
+                // res – response object (http.IncomingMessage)  //
                 console.log(res);
-            })
+              } );
 
             httpRequest( mcOptions, MC_BODY_OAUTH);
 
