@@ -207,6 +207,7 @@ function httpRequest( optionsParam, postData ) {
                     var bodyToString = body.toString();
                     var bodyToJson = JSON.parse(bodyToString);
 
+                    console.log('here is response')
                     console.log(bodyToJson);
                     
 
