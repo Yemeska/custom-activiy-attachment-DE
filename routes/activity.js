@@ -220,6 +220,7 @@ function httpRequest( optionsParam, postData ) {
                     mc_token = bodyToJson.access_token;
 
                     console.log(mc_token);
+                    console.log(bodyToJson);
 
                 } catch(e) {
                    new Error('277-> error: ' + e);
