@@ -119,7 +119,7 @@ exports.execute = function (req, res) {
             getTokenFromFerratum();
 
             console.log('Ferratum');
-            console.log(ferratum_token);
+            console.log('token ----  ' + ferratum_token + '  --------');
             
             //httpRequest( mcOptions, MC_BODY_OAUTH)
             
