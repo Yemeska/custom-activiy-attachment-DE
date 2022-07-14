@@ -142,7 +142,7 @@ exports.execute = function (req, res) {
                 // res – response object (http.IncomingMessage)  //
 
                 res.on('data', (chunk) => {
-                    console.log(chunk) // this is your response body
+                    console.log(chunk.toString()) // this is your response body
                 });
               } );
 
