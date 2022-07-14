@@ -141,7 +141,7 @@ exports.execute = function (req, res) {
 
 
             console.log('First get token from Ferratum---------------')
-            setTimeout( () => {
+           
                 form.submit('https://auth-server-ext.sit.ferratum.com/oauth/token', function(err, res) {
                 // res – response object (http.IncomingMessage)  //
 
@@ -156,13 +156,13 @@ exports.execute = function (req, res) {
 
                     ferratum_token = js.access_token;
                 });
-              } )}, 1500);
+              } )
 
 
             console.log('Second get token from MC ---------------')
-            setTimeout( () => {
-                httpRequest( mcOptions, MC_BODY_OAUTH)
-            }, 1500);
+            
+            httpRequest( mcOptions, MC_BODY_OAUTH)
+            
 
             var PDF_HEADERS = {
                 'Content-Type': 'application/json',
