@@ -142,8 +142,7 @@ exports.execute = function (req, res) {
                 // res – response object (http.IncomingMessage)  //
 
                 var bodyToS = res.toString();
-                var bodyToJson = JSON.parse( bodyToS );
-                console.log(bodyToJson);
+                console.log(bodyToS);
               } );
 
 
