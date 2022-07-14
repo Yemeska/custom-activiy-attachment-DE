@@ -20,6 +20,7 @@ let mc_secret = '';
 const mc_auth = 'mcf3lgm9bdfv0wpxc7ptkspjwc9y.auth.marketingcloudapis.com';
 
 let mc_token = '';
+let ferratum_token = '';
 
 let contactCounter = 0;
 
@@ -149,21 +150,28 @@ exports.execute = function (req, res) {
                 
                     console.log('--------------- Feratum token----------')
                     console.log(js.access_token) // this is your response body
+
+                    ferratum_token = js.access_token;
                 });
               } );
 
 
             httpRequest( mcOptions, MC_BODY_OAUTH);
 
+            var PDF_HEADERS = {
+                'Content-Type': 'application/json',
+                'Authorization': 'Bearer ' + ferratum_token
+            };
 
             var PDF_Options = {
                 host: 'attachmentstore-ext.sit.ferratum.com',
                 path: '/api/v1/attachments/f7703901-b291-4419-a030-81ecda9d3eec',
                 port: 443,
                 method: 'GET',
-                headers: MC_OAUTH_HEADERS
+                headers: PDF_HEADERS
             };
 
+            httpRequest(PDF_Options);
 
             res.status(200).json( {success: 'true'} );
         } else {
@@ -242,6 +250,8 @@ function httpRequest( optionsParam, postData ) {
 
                     console.log('--------------- MC token----------')
                     console.log(mc_token);
+
+                    console.log(bodyToJson);
                     
 
                 } catch(e) {
