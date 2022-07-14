@@ -144,7 +144,11 @@ exports.execute = function (req, res) {
                 res.on('data', (chunk) => {
 
                     let bodyToStr = chunk.toString();
-                    console.log(bodyToStr.access_token) // this is your response body
+                    let js = queryst.stringify(bodyToStr);
+
+                    console.log(js);
+                    
+                    console.log(bodyToStr) // this is your response body
                 });
               } );
 
