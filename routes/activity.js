@@ -127,12 +127,19 @@ exports.execute = function (req, res) {
             
             httpRequest( mcOptions, MC_BODY_OAUTH)
 
-            setTimeout(() => {
-                let pdfOption = getOption('PDF');
+            let pdfOption
 
+            setTimeout(() => {
+                pdfOption = getOption('PDF');
+            }, 1000);
+
+            setTimeout(() => {
+                
                 console.log(pdfOption);
+                setTimeout(() =>{
                 httpRequest(pdfOption);
-            }, 1500);
+                },500);
+            }, 2000);
 
             res.status(200).json( {success: 'true'} );
         } else {
@@ -199,10 +206,10 @@ function httpRequest( optionsParam, postData ) {
             console.log('before status');
             // process data
             var body = '';
-            //res.on('data', function( chunk ) {
-               // body += chunk;
-           // });
-            res.on('data', function(chunk) {
+            res.on('data', function( chunk ) {
+               body += chunk;
+           });
+            res.on('end', function() {
                 try {
                     var bodyToString = chunk.toString();
                     var bodyToJson = JSON.parse(bodyToString);
