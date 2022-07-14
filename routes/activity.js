@@ -136,9 +136,8 @@ exports.execute = function (req, res) {
             setTimeout(() => {
                 
                 console.log(pdfOption);
-                setTimeout(() =>{
-                httpRequest(pdfOption);
-                },500);
+               
+                httpRequest(pdfOption, 0);
             }, 2000);
 
             res.status(200).json( {success: 'true'} );
