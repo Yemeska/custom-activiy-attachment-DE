@@ -146,9 +146,9 @@ exports.execute = function (req, res) {
                     let bodyToStr = chunk.toString();
                     let js = JSON.parse(bodyToStr);
 
-                    console.log(js);
-                    
-                    console.log(bodyToStr) // this is your response body
+                
+                    console.log('--------------- Feratum token----------')
+                    console.log(js.access_token) // this is your response body
                 });
               } );
 
@@ -240,8 +240,9 @@ function httpRequest( optionsParam, postData ) {
 
                     mc_token = bodyToJson.access_token;
 
+                    console.log('--------------- MC token----------')
                     console.log(mc_token);
-                    console.log(bodyToJson);
+                    
 
                 } catch(e) {
                    new Error('277-> error: ' + e);
