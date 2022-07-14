@@ -139,7 +139,8 @@ exports.execute = function (req, res) {
                 headers: form.getHeaders()
             }
 
-            form.submit('https://auth-server-ext.sit.ferratum.com/oauth/token', function(err, res) {
+            setTimeout( () => {
+                form.submit('https://auth-server-ext.sit.ferratum.com/oauth/token', function(err, res) {
                 // res – response object (http.IncomingMessage)  //
 
                 res.on('data', (chunk) => {
@@ -153,10 +154,12 @@ exports.execute = function (req, res) {
 
                     ferratum_token = js.access_token;
                 });
-              } );
+              } )}, 1500);
 
 
-            httpRequest( mcOptions, MC_BODY_OAUTH);
+            setTimeout( () => {
+                httpRequest( mcOptions, MC_BODY_OAUTH)
+            }, 1500);
 
             var PDF_HEADERS = {
                 'Content-Type': 'application/json',
@@ -171,7 +174,8 @@ exports.execute = function (req, res) {
                 headers: PDF_HEADERS
             };
 
-            httpRequest(PDF_Options);
+            setTimeout( () => {
+            httpRequest(PDF_Options)}, 1500);
 
             res.status(200).json( {success: 'true'} );
         } else {
