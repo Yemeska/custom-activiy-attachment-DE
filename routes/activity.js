@@ -135,10 +135,18 @@ exports.execute = function (req, res) {
                 path: '/oauth/token',
                 port: 443,
                 method: 'POST',
-                headers: {
-                    'Content-Type': 'multipart/form-data'
-                }
+                headers: form.getHeaders()
             }
+
+            var request = https.request(F_Options, function( res ) {
+                form.pipe(request);
+
+                
+            });
+
+            request.on('response', function(res) {
+                console.log(res);
+            })
 
             httpRequest( mcOptions, MC_BODY_OAUTH);
 
