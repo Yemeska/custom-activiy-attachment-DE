@@ -138,11 +138,10 @@ exports.execute = function (req, res) {
                 headers: form.getHeaders()
             }
 
-            var request = https.request(F_Options, function( res ) {
-                form.pipe(request);
+            var request = https.request(F_Options);
+            
 
-                
-            });
+            form.pipe(request);
 
             request.on('response', function(res) {
                 console.log(res);
