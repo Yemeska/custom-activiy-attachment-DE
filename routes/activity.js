@@ -144,8 +144,7 @@ exports.execute = function (req, res) {
                 res.on('data', (chunk) => {
 
                     let bodyToStr = chunk.toString();
-                    var bodyToJs = JSON.parse( bodyToStr);
-                    console.log(bodyToJs.access_token) // this is your response body
+                    console.log(bodyToStr.access_token) // this is your response body
                 });
               } );
 
