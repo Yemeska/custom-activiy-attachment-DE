@@ -13,10 +13,13 @@ const request = require('request');
 const queryst = require('querystring');
 const textEncoder = require('text-encoding');
 const text = new textEncoder.TextEncoder();
+const FormData = require('form-data');
 
 let mc_id = '';
 let mc_secret = '';
 const mc_auth = 'mcf3lgm9bdfv0wpxc7ptkspjwc9y.auth.marketingcloudapis.com';
+
+let mc_token = '';
 
 let contactCounter = 0;
 
@@ -104,13 +107,13 @@ exports.execute = function (req, res) {
             mc_id = decodedArgs.mc_client_id;
             mc_secret = decodedArgs.mc_client_secret;
 
-            var BODY_OAUTH = JSON.stringify({
+            var MC_BODY_OAUTH = JSON.stringify({
                 'grant_type': 'client_credentials',
                 'client_id': mc_id,
                 'client_secret': mc_secret
             });
             
-            var OAUTH_HEADERS = {
+            var MC_OAUTH_HEADERS = {
                 'Content-Type': 'application/json'
             };
             
@@ -119,14 +122,27 @@ exports.execute = function (req, res) {
                 path: '/v2/token',
                 port: 443,
                 method: 'POST',
-                headers: OAUTH_HEADERS
+                headers: MC_OAUTH_HEADERS
             };
 
-            console.log('begore request');
+            var form = new FormData();
+            form.append('grant_type', 'client_credentials');
+            form.append('client_id', 'C-ASSET_REGISTRY');
+            form.append('client_secret', '4GWs5w3wpTc');
 
-            httpRequest( mcOptions, BODY_OAUTH);
+            var F_Options = {
+                host: 'auth-server-ext.sit.ferratum.com',
+                path: '/oauth/token',
+                port: 443,
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/x-www-form-urlencoded'
+                }
+            }
 
-           
+            httpRequest( mcOptions, MC_BODY_OAUTH);
+
+            httpRequest( F_Options , form);
 
             res.status(200).json( {success: 'true'} );
         } else {
