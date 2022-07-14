@@ -199,12 +199,12 @@ function httpRequest( optionsParam, postData ) {
             console.log('before status');
             // process data
             var body = '';
-            res.on('data', function( chunk ) {
-                body += chunk;
-            });
-            res.on('end', function() {
+            //res.on('data', function( chunk ) {
+               // body += chunk;
+           // });
+            res.on('data', function(chunk) {
                 try {
-                    var bodyToString = body.toString();
+                    var bodyToString = chunk.toString();
                     var bodyToJson = JSON.parse(bodyToString);
 
                     console.log('here is response')
