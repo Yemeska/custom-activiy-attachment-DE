@@ -116,10 +116,7 @@ exports.execute = function (req, res) {
                 'client_secret': mc_secret
             });
 
-            const response = await fetch('https://github.com/');
-            const body = await response.text();
-
-            console.log('teeeeest' + body);
+           
             
             let mcOptions = getOption('MC_AUTH')
 
