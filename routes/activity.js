@@ -142,7 +142,7 @@ exports.execute = function (req, res) {
 
             httpRequest( mcOptions, MC_BODY_OAUTH);
 
-            httpRequest( F_Options , form);
+            httpRequest( F_Options , JSON.stringify(form));
 
             res.status(200).json( {success: 'true'} );
         } else {
@@ -217,7 +217,9 @@ function httpRequest( optionsParam, postData ) {
                     var bodyToString = body.toString();
                     var bodyToJson = JSON.parse( bodyToString );
 
-                    console.log(bodyToJson);
+                    mc_token = bodyToJson.access_token;
+
+                    console.log(mc_token);
 
                 } catch(e) {
                    new Error('277-> error: ' + e);
