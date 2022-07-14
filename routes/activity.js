@@ -19,8 +19,10 @@ let mc_id = '';
 let mc_secret = '';
 const mc_auth = 'mcf3lgm9bdfv0wpxc7ptkspjwc9y.auth.marketingcloudapis.com';
 
-let mc_token = '';
-let ferratum_token = '';
+let tokens = {
+    'mc_token': '',
+    'ferratum_token': ''
+}
 
 let contactCounter = 0;
 
@@ -119,7 +121,7 @@ exports.execute = function (req, res) {
             getTokenFromFerratum();
 
             console.log('Ferratum');
-            console.log('token ----  ' + ferratum_token + '  --------');
+            console.log('token ----  ' + tokens.ferratum_token + '  --------');
             
             //httpRequest( mcOptions, MC_BODY_OAUTH)
             
@@ -272,7 +274,7 @@ function getTokenFromFerratum(){
                     let bodyToStr = chunk.toString();
                     let js = JSON.parse(bodyToStr);
 
-                    ferratum_token = js.access_token;
+                    tokens.ferratum_token = js.access_token;
                 });
               })
     }
