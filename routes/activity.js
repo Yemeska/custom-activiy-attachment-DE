@@ -141,7 +141,9 @@ exports.execute = function (req, res) {
             form.submit('https://auth-server-ext.sit.ferratum.com/oauth/token', function(err, res) {
                 // res – response object (http.IncomingMessage)  //
 
-                console.log(res);
+                res.on('data', (chunk) => {
+                    console.log(chunk) // this is your response body
+                });
               } );
 
 
