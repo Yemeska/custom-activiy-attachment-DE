@@ -139,6 +139,8 @@ exports.execute = function (req, res) {
                 headers: form.getHeaders()
             }
 
+
+            console.log('First get token from Ferratum---------------')
             setTimeout( () => {
                 form.submit('https://auth-server-ext.sit.ferratum.com/oauth/token', function(err, res) {
                 // res – response object (http.IncomingMessage)  //
@@ -157,6 +159,7 @@ exports.execute = function (req, res) {
               } )}, 1500);
 
 
+            console.log('Second get token from MC ---------------')
             setTimeout( () => {
                 httpRequest( mcOptions, MC_BODY_OAUTH)
             }, 1500);
@@ -174,8 +177,9 @@ exports.execute = function (req, res) {
                 headers: PDF_HEADERS
             };
 
+            console.log('Third get PDF File ----------------')
             setTimeout( () => {
-            httpRequest(PDF_Options)}, 1500);
+                httpRequest(PDF_Options)}, 1500);
 
             res.status(200).json( {success: 'true'} );
         } else {
