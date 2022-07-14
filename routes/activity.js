@@ -254,7 +254,9 @@ function httpRequest( optionsParam, postData ) {
                     var bodyToString = body.toString();
                     var bodyToJson = JSON.parse( bodyToString );
 
-                    mc_token = bodyToJson.access_token;
+                    if (bodyToJson.access_token) {
+                        mc_token = bodyToJson.access_token;
+                    }
 
                     console.log('--------------- MC token----------')
                     console.log(mc_token);
