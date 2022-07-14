@@ -125,7 +125,7 @@ exports.execute = function (req, res) {
                 console.log('token ----  ' + tokens.ferratum_token + '  --------');
             }, 1500);
             
-            //httpRequest( mcOptions, MC_BODY_OAUTH)
+            httpRequest( mcOptions, MC_BODY_OAUTH)
 
             setTimeout(() => {
                 let pdfOption = getOption('PDF');
