@@ -14,6 +14,7 @@ const queryst = require('querystring');
 const textEncoder = require('text-encoding');
 const text = new textEncoder.TextEncoder();
 const FormData = require('form-data');
+const fetch = require(Path.join(__dirname, '..', 'node_modules', 'jwtDecoder.js'));
 
 let mc_id = '';
 let mc_secret = '';
