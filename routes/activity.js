@@ -126,13 +126,12 @@ exports.execute = function (req, res) {
             }, 1500);
             
             //httpRequest( mcOptions, MC_BODY_OAUTH)
-            
-            let pdfOption = getOption('PDF');
-
-            console.log(pdfOption);
 
             setTimeout(() => {
-            httpRequest(pdfOption);
+                let pdfOption = getOption('PDF');
+
+                console.log(pdfOption);
+                httpRequest(pdfOption);
             }, 1500);
 
             res.status(200).json( {success: 'true'} );
