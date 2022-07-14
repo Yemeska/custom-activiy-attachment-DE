@@ -120,14 +120,16 @@ exports.execute = function (req, res) {
 
             getTokenFromFerratum();
 
-            console.log('Ferratum');
-            console.log('token ----  ' + tokens.ferratum_token + '  --------');
+            setTimeout( () => {
+                console.log('Ferratum');
+                console.log('token ----  ' + tokens.ferratum_token + '  --------');
+            }, 1500);
             
             //httpRequest( mcOptions, MC_BODY_OAUTH)
             
             let pdfOption = getOption('PDF');
 
-            httpRequest(pdfOption);
+            //httpRequest(pdfOption);
 
             res.status(200).json( {success: 'true'} );
         } else {
@@ -242,7 +244,7 @@ function getOption(toUseFor) {
     }else if(toUseFor == 'PDF') {
         var PDF_HEADERS = {
             'Content-Type': 'application/json',
-            'Authorization': 'Bearer ' + ferratum_token
+            'Authorization': 'Bearer ' + tokens.ferratum_token
         };
 
         var PDF_Options = {
