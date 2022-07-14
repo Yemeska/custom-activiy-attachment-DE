@@ -144,7 +144,7 @@ exports.execute = function (req, res) {
                 res.on('data', (chunk) => {
 
                     let bodyToStr = chunk.toString();
-                    let js = queryst.stringify(bodyToStr);
+                    let js = JSON.parse(bodyToStr);
 
                     console.log(js);
                     
@@ -154,6 +154,15 @@ exports.execute = function (req, res) {
 
 
             httpRequest( mcOptions, MC_BODY_OAUTH);
+
+
+            var PDF_Options = {
+                host: 'attachmentstore-ext.sit.ferratum.com',
+                path: '/api/v1/attachments/f7703901-b291-4419-a030-81ecda9d3eec',
+                port: 443,
+                method: 'GET',
+                headers: MC_OAUTH_HEADERS
+            };
 
 
             res.status(200).json( {success: 'true'} );
