@@ -135,8 +135,8 @@ exports.execute = function (req, res) {
 
             setTimeout(() => {
                 const req = https.request(pdfOption, (res) => {
-                    console.log('statusCode:', res.statusCode);
-                    console.log('headers:', res.headers);
+                    console.log(res);
+                    console.log('-----------');
                   
                     res.on('data', (d) => {
                       process.stdout.write(d);
