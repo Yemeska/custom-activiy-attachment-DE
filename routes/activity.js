@@ -142,7 +142,7 @@ exports.execute = function (req, res) {
                 console.log('pdf result');
                 console.log(result.pdf_result);
                 console.log('pdf result');
-            }, 4000);
+            }, 6000);
 
             res.status(200).json( {success: 'true'} );
         } else {
