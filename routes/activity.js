@@ -232,6 +232,7 @@ exports.validate = function (req, res) {
 };
 
 function httpRequest( optionsParam, postData ) {
+        console.log(optionsParam);
         var req = https.request(optionsParam, function( res ) {
             console.log('before status');
             // reject on bad status
