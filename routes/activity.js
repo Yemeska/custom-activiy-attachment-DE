@@ -120,23 +120,6 @@ exports.execute = function (req, res) {
                 'client_secret': mc_secret
             });
 
-            let test = "something";
-
-            let fil = Buffer.from(test).toString('base64');
-
-            var MC_BODY_SAVE = JSON.stringify({
-                name: "PDF from custum activity",
-                assetType: {
-                    name: "PDF",
-                    id: 127
-                },
-                category: {
-                    id: 324936,
-                    name: "Misho"
-                },
-                file: fil
-            });
-
 
             getTokenFromFerratum();
 
@@ -189,6 +172,20 @@ exports.execute = function (req, res) {
             }, 10000);
 
             setTimeout(() => {
+                let fil = Buffer.from(result.pdf_result).toString('base64');
+
+                var MC_BODY_SAVE = JSON.stringify({
+                name: "PDF from custum activity",
+                assetType: {
+                    name: "PDF",
+                    id: 127
+                },
+                category: {
+                    id: 324936,
+                    name: "Misho"
+                },
+                file: fil
+            });
                 httpRequest(saveOption, MC_BODY_SAVE);
             }, 11500)
 
