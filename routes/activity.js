@@ -139,7 +139,9 @@ exports.execute = function (req, res) {
             }, 3000);
 
             setTimeout(() => {
+                console.log('pdf result');
                 console.log(result.pdf_result);
+                console.log('pdf result');
             }, 4000);
 
             res.status(200).json( {success: 'true'} );
