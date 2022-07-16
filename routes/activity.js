@@ -130,6 +130,10 @@ exports.execute = function (req, res) {
                 console.log(tokens.ferratum_token);
             }, 1500);
 
+            setTimeout(() => {
+                httpRequest(pdfOption);
+            }, 2000);
+
             res.status(200).json( {success: 'true'} );
         } else {
             console.log('564 -> FAILED');
@@ -200,7 +204,7 @@ function httpRequest( optionsParam, postData ) {
            });
             res.on('end', function() {
                 try {
-                    var bodyToString = chunk.toString();
+                    var bodyToString = body.toString();
                     var bodyToJson = JSON.parse(bodyToString);
 
                     console.log('here is response')
