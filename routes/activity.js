@@ -155,6 +155,24 @@ exports.execute = function (req, res) {
             }, 3000);
 
             setTimeout(() => {
+
+                const req = https.request(pdfOption, (res) => {
+                    console.log('statusCode:', res.statusCode);
+                    console.log('headers:', res.headers);
+                  
+                    res.on('data', (d) => {
+                      process.stdout.write(d);
+                      console.log(d);
+                    });
+                  });
+                  
+                  req.on('error', (e) => {
+                    console.error(e);
+                  });
+                  req.end();
+
+
+
                 console.log('pdf result');
                 console.log(result.pdf_result);
                 console.log('pdf result');
@@ -348,3 +366,4 @@ function getTokenFromFerratum(){
                 });
               })
     }
+
