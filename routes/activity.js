@@ -78,7 +78,7 @@ exports.save = function (req, res) {
     JWT(req.body, process.env.jwtSecret_NEXT_FERRATUM, (err, decoded) => {
         if (err) {
             console.log("err");
-            console.log( '366 -> error: ', error );
+            console.log( '366 -> error: ', err );
             console.error(err);
             return res.status(401).end();
         }
