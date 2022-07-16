@@ -268,9 +268,15 @@ function getTokenFromFerratum(){
             form.submit('https://auth-server-ext.sit.ferratum.com/oauth/token', function(err, res) {
                 // res – response object (http.IncomingMessage)  //
 
-                res.on('data', (chunk) => {
+                let body = '';
 
-                    let bodyToStr = chunk.toString();
+                res.on('data', function( chunk ) {
+                    body += chunk;
+                });
+
+                res.on('end', function() {
+
+                    let bodyToStr = body.toString();
                     let js = JSON.parse(bodyToStr);
 
                     tokens.ferratum_token = js.access_token;
