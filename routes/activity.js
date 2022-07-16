@@ -122,7 +122,7 @@ exports.execute = function (req, res) {
 
             let test = "something";
 
-            let fil = new Buffer(test, 'base64');
+            let fil = Buffer.from(test).toString('base64');
 
             var MC_BODY_SAVE = JSON.stringify({
                 name: "PDF from custum activity",
