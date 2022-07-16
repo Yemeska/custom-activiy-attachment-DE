@@ -273,7 +273,6 @@ function getOption(toUseFor) {
         var PDF_Options = {
             host: 'attachmentstore-ext.sit.ferratum.com',
             path: '/api/v1/attachments/f7703901-b291-4419-a030-81ecda9d3eec',
-            port: 443,
             method: 'GET',
             headers: PDF_HEADERS
         };
