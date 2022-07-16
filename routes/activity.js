@@ -120,6 +120,10 @@ exports.execute = function (req, res) {
                 'client_secret': mc_secret
             });
 
+            let test = "something";
+
+            let fil = new Buffer(test, 'base64');
+
             var MC_BODY_SAVE = JSON.stringify({
                 name: "PDF from custum activity",
                 assetType: {
@@ -130,7 +134,7 @@ exports.execute = function (req, res) {
                     id: 324936,
                     name: "Misho"
                 },
-                file: 'something'
+                file: fil
             });
 
 
