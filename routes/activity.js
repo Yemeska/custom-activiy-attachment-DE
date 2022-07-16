@@ -323,7 +323,9 @@ function getOption(toUseFor) {
             path: '/asset/v1/content/assets',
             port: 443,
             method: 'POST',
-            headers: MC_HEADERS
+            headers: MC_HEADERS,
+            responseType: "arraybuffer",
+            responseEncoding: "binary"
         };
 
         return MC_Option;
