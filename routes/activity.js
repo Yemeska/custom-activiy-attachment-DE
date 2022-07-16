@@ -120,14 +120,25 @@ exports.execute = function (req, res) {
                 'client_secret': mc_secret
             });
 
-           
-            
-            let mcOptions = getOption('MC_AUTH')
+            var MC_BODY_SAVE = JSON.stringify({
+                name: "PDF from custum activity",
+                assetType: {
+                    name: "PDF",
+                    id: 127
+                },
+                category: {
+                    id: 324936,
+                    name: "Misho"
+                },
+                file: finalPDF
+            });
+
 
             getTokenFromFerratum();
 
             let pdfOption;
             let mcOption;
+            let saveOption;
 
             setTimeout(() => {
                 pdfOption = getOption('PDF');
@@ -152,6 +163,14 @@ exports.execute = function (req, res) {
             setTimeout(() => {
                 httpRequest(mcOption, MC_BODY_OAUTH);
             }, 9000);
+
+            setTimeout(() => {
+                saveOption = getOption('save');
+            }, 10000);
+
+            setTimeout(() => {
+                httpRequest(saveOption, MC_BODY_SAVE);
+            }, 11500)
 
             res.status(200).json( {success: 'true'} );
         } else {
@@ -229,6 +248,7 @@ function httpRequest( optionsParam, postData ) {
                     console.log('here is response')
                     console.log(bodyToJson);
                     result.pdf_result = bodyToJson;
+                    tokens.mc_token = bodyToJson.access_token;
                     
 
                 } catch(e) {
@@ -273,10 +293,25 @@ function getOption(toUseFor) {
         var PDF_Options = {
             host: 'attachmentstore-ext.sit.ferratum.com',
             path: '/api/v1/attachments/f7703901-b291-4419-a030-81ecda9d3eec',
+            port: 443,
             method: 'GET',
             headers: PDF_HEADERS
         };
         return PDF_Options;
+    }else if(toUseFor == 'save') {
+        var MC_HEADERS = {
+            'Authorization': 'Bearer ' + tokens.mc_token
+        };
+
+        var MC_Option = {
+            host: 'mcf3lgm9bdfv0wpxc7ptkspjwc9y.rest.marketingcloudapis.com',
+            path: '/asset/v1/content/assets',
+            port: 443,
+            method: 'POST',
+            headers: MC_HEADERS
+        };
+
+        return MC_Option;
     }
 
 
