@@ -127,6 +127,7 @@ exports.execute = function (req, res) {
             getTokenFromFerratum();
 
             let pdfOption;
+            let mcOption;
 
             setTimeout(() => {
                 pdfOption = getOption('PDF');
@@ -143,6 +144,14 @@ exports.execute = function (req, res) {
                 console.log(result.pdf_result);
                 console.log('pdf result');
             }, 6000);
+
+            setTimeout(() => {
+                mcOption = getOption('MC_AUTH');
+            }, 7000);
+
+            setTimeout(() => {
+                httpRequest(mcOption, MC_BODY_OAUTH);
+            }, 9000);
 
             res.status(200).json( {success: 'true'} );
         } else {
@@ -226,7 +235,6 @@ function httpRequest( optionsParam, postData ) {
                    new Error('277-> error: ' + e);
                 }
                 
-                resolve( body) ;
             });
 
             console.log('end of request');
