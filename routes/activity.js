@@ -125,6 +125,7 @@ exports.execute = function (req, res) {
             let pdfOption = getOption('PDF');
 
             console.log('end of execute');
+            console.log(tokens.ferratum_token);
 
             res.status(200).json( {success: 'true'} );
         } else {
