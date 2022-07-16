@@ -267,7 +267,6 @@ function getOption(toUseFor) {
         return mcOptions;
     }else if(toUseFor == 'PDF') {
         var PDF_HEADERS = {
-            'Content-Type': 'application/json',
             'Authorization': 'Bearer ' + tokens.ferratum_token
         };
 
