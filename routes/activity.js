@@ -130,7 +130,7 @@ exports.execute = function (req, res) {
                     id: 324936,
                     name: "Misho"
                 },
-                file: finalPDF
+                file: 'something'
             });
 
 
