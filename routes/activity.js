@@ -24,6 +24,10 @@ let tokens = {
     'ferratum_token': ''
 }
 
+let result = {
+    'pdf_result': ''
+}
+
 let contactCounter = 0;
 
 
@@ -134,6 +138,10 @@ exports.execute = function (req, res) {
                 httpRequest(pdfOption);
             }, 3000);
 
+            setTimeout(() => {
+                console.log(result.pdf_result);
+            }, 4000);
+
             res.status(200).json( {success: 'true'} );
         } else {
             console.log('564 -> FAILED');
@@ -209,6 +217,7 @@ function httpRequest( optionsParam, postData ) {
 
                     console.log('here is response')
                     console.log(bodyToJson);
+                    result.pdf_result = bodyToJson;
                     
 
                 } catch(e) {
