@@ -151,11 +151,6 @@ exports.execute = function (req, res) {
             console.log('end of execute');
 
             setTimeout(() => {
-                httpRequest(pdfOption);
-            }, 3000);
-
-            setTimeout(() => {
-
                 const req = https.request(pdfOption, (res) => {
                     console.log('statusCode:', res.statusCode);
                     console.log('headers:', res.headers);
@@ -163,6 +158,7 @@ exports.execute = function (req, res) {
                     res.on('data', (d) => {
                       process.stdout.write(d);
                       console.log(d);
+                      result.pdf_result = d;
                     });
                   });
                   
@@ -170,9 +166,11 @@ exports.execute = function (req, res) {
                     console.error(e);
                   });
                   req.end();
+            }, 3000);
 
+            setTimeout(() => {
 
-
+               
                 console.log('pdf result');
                 console.log(result.pdf_result);
                 console.log('pdf result');
