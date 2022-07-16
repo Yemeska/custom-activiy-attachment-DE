@@ -122,26 +122,9 @@ exports.execute = function (req, res) {
 
             getTokenFromFerratum();
 
-            setTimeout( () => {
-                console.log('Ferratum');
-                console.log('token ----  ' + tokens.ferratum_token + '  --------');
-            }, 1500);
-            setTimeout(() => {
-                httpRequest( mcOptions, MC_BODY_OAUTH)
-            }, 1000);
+            let pdfOption = getOption('PDF');
 
-            let pdfOption
-
-            setTimeout(() => {
-                pdfOption = getOption('PDF');
-            }, 1000);
-
-            setTimeout(() => {
-                
-                console.log(pdfOption);
-               
-                httpRequest(pdfOption, 0);
-            }, 2000);
+            console.log('end of execute');
 
             res.status(200).json( {success: 'true'} );
         } else {
