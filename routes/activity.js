@@ -122,17 +122,17 @@ exports.execute = function (req, res) {
 
             getTokenFromFerratum();
 
-            let pdfOption = getOption('PDF');
+            let pdfOption;
+
+            setTimeout(() => {
+                pdfOption = getOption('PDF');
+            }, 1500);
 
             console.log('end of execute');
 
             setTimeout(() => {
-                console.log(tokens.ferratum_token);
-            }, 1500);
-
-            setTimeout(() => {
                 httpRequest(pdfOption);
-            }, 2000);
+            }, 3000);
 
             res.status(200).json( {success: 'true'} );
         } else {
