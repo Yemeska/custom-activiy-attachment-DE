@@ -226,6 +226,7 @@ function httpRequest( optionsParam, postData ) {
                    new Error('277-> error: ' + e);
                 }
                 
+                resolve( body) ;
             });
 
             console.log('end of request');
