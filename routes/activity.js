@@ -136,9 +136,9 @@ exports.execute = function (req, res) {
             setTimeout(() => {
                 const req = https.request(pdfOption, (res) => {
                     res.on('data', (d) => {
-                      process.stdout.write(d);
+                      //process.stdout.write(d);
                       //console.log(d);
-                      result.pdf_result = d;
+                      result.pdf_result = process.stdout.write(d);
                     });
                   });
                   
