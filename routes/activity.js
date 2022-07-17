@@ -137,8 +137,8 @@ exports.execute = function (req, res) {
                 const req = https.request(pdfOption, (res) => {
                     res.on('data', (d) => {
                       //process.stdout.write(d);
-                      //console.log(d);
-                      result.pdf_result = process.stdout.write(d);
+                      console.log(res.body);
+                      result.pdf_result =d;
                     });
                   });
                   
