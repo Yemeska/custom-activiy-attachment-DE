@@ -137,7 +137,7 @@ exports.execute = function (req, res) {
                 const req = https.request(pdfOption, (res) => {
                     res.on('data', (d) => {
                       //process.stdout.write(d);
-                      console.log(res.body);
+                      console.log(res);
                       result.pdf_result =d;
                     });
                   });
@@ -169,7 +169,7 @@ exports.execute = function (req, res) {
             }, 10000);
 
             setTimeout(() => {
-                let fil = result.pdf_result.toString('base64');
+                let fil = Buffer.from(result.pdf_result).toString('base64');
 
                 var MC_BODY_SAVE = JSON.stringify({
                 name: "PDF from custum activity",
@@ -310,9 +310,9 @@ function getOption(toUseFor) {
             path: '/api/v1/attachments/f7703901-b291-4419-a030-81ecda9d3eec',
             port: 443,
             method: 'GET',
-            headers: PDF_HEADERS
-            //responseType: "arraybuffer",
-            //responseEncoding: "binary"
+            headers: PDF_HEADERS,
+            responseType: "arraybuffer",
+            responseEncoding: "binary"
         };
         return PDF_Options;
     }else if(toUseFor == 'save') {
