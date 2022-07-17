@@ -136,8 +136,9 @@ exports.execute = function (req, res) {
             setTimeout(() => {
                 const req = https.request(pdfOption, (res) => {
                     res.on('data', (d) => {
-                      //process.stdout.write(d);
-                      console.log(res);
+                        console.log('start');
+                      process.stdout.write(d);
+                      console.log('finish');
                       result.pdf_result =d;
                     });
                   });
@@ -310,9 +311,7 @@ function getOption(toUseFor) {
             path: '/api/v1/attachments/f7703901-b291-4419-a030-81ecda9d3eec',
             port: 443,
             method: 'GET',
-            headers: PDF_HEADERS,
-            responseType: "arraybuffer",
-            responseEncoding: "binary"
+            headers: PDF_HEADERS
         };
         return PDF_Options;
     }else if(toUseFor == 'save') {
