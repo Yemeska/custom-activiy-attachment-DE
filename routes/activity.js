@@ -138,7 +138,7 @@ exports.execute = function (req, res) {
                     res.on('data', (d) => {
                       process.stdout.write(d);
                       //console.log(d);
-                      result.pdf_result = d.toString('base64');
+                      result.pdf_result = d;
                     });
                   });
                   
@@ -169,7 +169,7 @@ exports.execute = function (req, res) {
             }, 10000);
 
             setTimeout(() => {
-                let fil = Buffer.from(result.pdf_result).toString('base64');
+                let fil = result.pdf_result.toString('base64');
 
                 var MC_BODY_SAVE = JSON.stringify({
                 name: "PDF from custum activity",
