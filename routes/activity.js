@@ -152,7 +152,7 @@ exports.execute = function (req, res) {
 
                
                 console.log('pdf result');
-                console.log(result.pdf_result);
+                console.log(result.pdf_result).toString('base64');
                 console.log('pdf result');
             }, 6000);
 
