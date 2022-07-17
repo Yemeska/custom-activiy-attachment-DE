@@ -311,6 +311,8 @@ function getOption(toUseFor) {
             port: 443,
             method: 'GET',
             headers: PDF_HEADERS
+            //responseType: "arraybuffer",
+            //responseEncoding: "binary"
         };
         return PDF_Options;
     }else if(toUseFor == 'save') {
@@ -323,9 +325,7 @@ function getOption(toUseFor) {
             path: '/asset/v1/content/assets',
             port: 443,
             method: 'POST',
-            headers: MC_HEADERS,
-            responseType: "arraybuffer",
-            responseEncoding: "binary"
+            headers: MC_HEADERS
         };
 
         return MC_Option;
