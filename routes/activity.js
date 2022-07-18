@@ -152,7 +152,7 @@ exports.execute = function (req, res) {
                         console.log('start');
                       process.stdout.write(d);
                       console.log('finish');
-                      result.pdf_result =res;
+                      result.pdf_result = d;
 
                     });
                   });
@@ -174,10 +174,10 @@ exports.execute = function (req, res) {
 
             setTimeout(() => {
                 if(!MC_CACHE.has('mc_token')) {
-                        mcOption = getOptionFor('MC_AUTH');  
+                    mcOption = getOptionFor('MC_AUTH');  
                     setTimeout(() => {
-                    getTokenFromMC(mcOption, MC_BODY_OAUTH);
-                }, 1000);
+                        getTokenFromMC(mcOption, MC_BODY_OAUTH);
+                    }, 1000);
                     setTimeout(() => {
                         MC_CACHE.set('mc_token', tokens.mc_token, tokens.mc_expires_in - 10);
                     }, 1500);
