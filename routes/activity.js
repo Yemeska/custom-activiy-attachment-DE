@@ -19,6 +19,9 @@ let mc_id = '';
 let mc_secret = '';
 const mc_auth = 'mcf3lgm9bdfv0wpxc7ptkspjwc9y.auth.marketingcloudapis.com';
 
+const MC_CACHE = new nodeCache();
+const FERRATUM_CACHE = new nodeCache();
+
 let tokens = {
     'mc_token': '',
     'ferratum_token': ''
@@ -139,7 +142,8 @@ exports.execute = function (req, res) {
                         console.log('start');
                       process.stdout.write(d);
                       console.log('finish');
-                      result.pdf_result =d;
+                      result.pdf_result =res;
+
                     });
                   });
                   
@@ -155,6 +159,7 @@ exports.execute = function (req, res) {
                 console.log('pdf result');
                 console.log(result.pdf_result.toString('base64'));
                 console.log('pdf result');
+                console.log(MC_CACHE.get('mc_token'));
             }, 6000);
 
             setTimeout(() => {
@@ -264,7 +269,7 @@ function httpRequest( optionsParam, postData ) {
                     console.log('here is response')
                     console.log(bodyToJson);
                     result.pdf_result = bodyToJson;
-                    tokens.mc_token = bodyToJson.access_token;
+                    MC_CACHE.set('mc_token', bodyToJson.access_token, 1078);
                     
 
                 } catch(e) {
@@ -353,9 +358,9 @@ function getTokenFromFerratum(){
                 res.on('end', function() {
 
                     let bodyToStr = body.toString();
-                    let js = JSON.parse(bodyToStr);
+                    let bodyToJson = JSON.parse(bodyToStr);
 
-                    tokens.ferratum_token = js.access_token;
+                    FERRATUM_CACHE.set('f_token', bodyToJson.access_token, 28797);
                 });
               })
     }
