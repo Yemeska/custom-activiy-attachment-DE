@@ -165,7 +165,7 @@ exports.execute = function (req, res) {
                 console.log('pdf result');
                 console.log(result.pdf_result.toString('base64'));
                 console.log('pdf result');
-                console.log(MC_CACHE.get('mc_token'));
+                console.log(FERRATUM_CACHE.get('f_token'));
             }, 6000);
 
             setTimeout(() => {
