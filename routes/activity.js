@@ -24,7 +24,9 @@ const FERRATUM_CACHE = new nodeCache();
 
 let tokens = {
     'mc_token': '',
-    'ferratum_token': ''
+    'mc_expires_in': 0,
+    'ferratum_token': '',
+    'ferratum_token_expires_in': 0
 }
 
 let result = {
@@ -124,7 +126,9 @@ exports.execute = function (req, res) {
             });
 
 
-            getTokenFromFerratum();
+            getTokenFromFerratum().then(function() {
+                FERRATUM_CACHE.set('f_token', tokens.ferratum_token, tokens.ferratum_token_expires_in);
+            });
 
             let pdfOption;
             let mcOption;
@@ -269,7 +273,9 @@ function httpRequest( optionsParam, postData ) {
                     console.log('here is response')
                     console.log(bodyToJson);
                     result.pdf_result = bodyToJson;
-                    MC_CACHE.set('mc_token', bodyToJson.access_token, 1078);
+                    tokens.mc_token = bodyToJson.access_token;
+                    tokens.mc_expires_in = bodyToJson.expires_in;
+                    
                     
 
                 } catch(e) {
@@ -360,7 +366,8 @@ function getTokenFromFerratum(){
                     let bodyToStr = body.toString();
                     let bodyToJson = JSON.parse(bodyToStr);
 
-                    FERRATUM_CACHE.set('f_token', bodyToJson.access_token, 28797);
+                    tokens.ferratum_token = bodyToJson.access_token
+                    tokens.ferratum_token_expires_in = bodyToJson.expires_in;
                 });
               })
     }
