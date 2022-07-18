@@ -179,9 +179,9 @@ exports.execute = function (req, res) {
                 mcOption = getOptionFor('MC_AUTH');
 
                 setTimeout(() => {
-                    if(!MC_CACHE.has('mc_token')) {
+                 
                         getTokenFromMC(mcOption, MC_BODY_OAUTH);
-                    }
+                    
                 }, 1000);
             }, 8000);
 
