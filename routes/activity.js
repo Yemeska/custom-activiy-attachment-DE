@@ -375,3 +375,37 @@ function getTokenFromFerratum(id, secret){
               })
     }
 
+    function httpRequest( optionsParam, postData ) {
+        console.log(optionsParam);
+        var req = https.request(optionsParam, function( res ) {
+
+            // reject on bad status
+            if ( res.statusCode < 200 || res.statusCode >= 300 ) {
+                new Error('statusMessage=' + res.statusMessage);
+            }
+
+            // process data
+            var body = '';
+            res.on('data', function( chunk ) {
+               body += chunk;
+           });
+            res.on('end', function() {
+                try {
+                    var bodyToString = body.toString();
+                    var bodyToJson = JSON.parse(bodyToString);
+
+                } catch(e) {
+                   new Error('277-> error: ' + e);
+                }
+                
+            });
+        });
+        req.on('error', function( err ) {
+            console.log('283 -> error: ', err);
+                new Error('284 -> error: ' + err);
+        });
+        if ( postData ) {
+            req.write( postData );
+        }
+        req.end();
+}
