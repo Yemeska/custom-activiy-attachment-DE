@@ -125,10 +125,10 @@ exports.execute = function (req, res) {
                 'client_secret': mc_secret
             });
 
-            if(FERRATUM_CACHE) {
+            if(!Boolean(FERRATUM_CACHE)) {
             getTokenFromFerratum();
             setTimeout(() => {
-                FERRATUM_CACHE.set('f_token', tokens.ferratum_token, tokens.ferratum_token_expires_in - 500);
+                FERRATUM_CACHE.set('f_token', tokens.ferratum_token, tokens.ferratum_token_expires_in - 10);
             }, 1000);
             };
 
@@ -316,7 +316,7 @@ function getOption(toUseFor) {
         return mcOptions;
     }else if(toUseFor == 'PDF') {
         var PDF_HEADERS = {
-            'Authorization': 'Bearer ' + tokens.ferratum_token
+            'Authorization': 'Bearer ' + FERRATUM_CACHE.get('f_token')
         };
 
         var PDF_Options = {
