@@ -125,11 +125,12 @@ exports.execute = function (req, res) {
                 'client_secret': mc_secret
             });
 
-           
-            getTokenFromFerratum();
-            setTimeout(() => {
-                FERRATUM_CACHE.set('f_token', tokens.ferratum_token, tokens.ferratum_token_expires_in - 10);
-            }, 1000);
+           if(!FERRATUM_CACHE.has('t_token')) {
+                getTokenFromFerratum();
+                setTimeout(() => {
+                    FERRATUM_CACHE.set('f_token', tokens.ferratum_token, tokens.ferratum_token_expires_in - 10);
+                }, 1000);
+            };   
             
 
             let pdfOption;
