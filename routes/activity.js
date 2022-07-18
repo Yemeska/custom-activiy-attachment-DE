@@ -17,6 +17,8 @@ const FormData = require('form-data');
 
 let mc_id = '';
 let mc_secret = '';
+let f_id = '';
+let f_secret = '';
 const mc_auth = 'mcf3lgm9bdfv0wpxc7ptkspjwc9y.auth.marketingcloudapis.com';
 
 const MC_CACHE = new nodeCache();
@@ -119,14 +121,17 @@ exports.execute = function (req, res) {
             mc_id = decodedArgs.mc_client_id;
             mc_secret = decodedArgs.mc_client_secret;
 
+            f_id = decodedArgs.user;
+            f_secret = decodedArgs.password;
+
             var MC_BODY_OAUTH = JSON.stringify({
                 'grant_type': 'client_credentials',
                 'client_id': mc_id,
                 'client_secret': mc_secret
             });
 
-           if(!FERRATUM_CACHE.has('t_token')) {
-                getTokenFromFerratum();
+           if(!FERRATUM_CACHE.has('f_token')) {
+                getTokenFromFerratum(f_id, f_secret);
                 setTimeout(() => {
                     FERRATUM_CACHE.set('f_token', tokens.ferratum_token, tokens.ferratum_token_expires_in - 10);
                 }, 1000);
@@ -138,10 +143,8 @@ exports.execute = function (req, res) {
             let saveOption;
 
             setTimeout(() => {
-                pdfOption = getOption('PDF');
+                pdfOption = getOptionFor('retrieve_PDF');
             }, 2500);
-
-            console.log('end of execute');
 
             setTimeout(() => {
                 const req = https.request(pdfOption, (res) => {
@@ -158,7 +161,7 @@ exports.execute = function (req, res) {
                     console.error(e);
                   });
                   req.end();
-            }, 4000);
+            }, 3500);
 
             setTimeout(() => {
 
@@ -166,23 +169,28 @@ exports.execute = function (req, res) {
                 console.log('pdf result');
                 console.log(result.pdf_result.toString('base64'));
                 console.log('pdf result');
-                console.log(FERRATUM_CACHE.get('f_token'));
             }, 6000);
 
             setTimeout(() => {
-                mcOption = getOption('MC_AUTH');
+                mcOption = getOptionFor('MC_AUTH');
             }, 7000);
 
             setTimeout(() => {
-                httpRequest(mcOption, MC_BODY_OAUTH);
-            }, 9000);
+                mcOption = getOptionFor('MC_AUTH');
+
+                setTimeout(() => {
+                    if(!MC_CACHE.has('mc_token')) {
+                        getTokenFromMC(mcOption, MC_BODY_OAUTH);
+                    }
+                }, 1000);
+            }, 8000);
 
             setTimeout(() => {
-                saveOption = getOption('save');
+                saveOption = getOptionFor('save_PDF');
             }, 10000);
 
             setTimeout(() => {
-                let fil = Buffer.from(result.pdf_result).toString('base64');
+                let fil = Buffer.from("something").toString('base64');
 
                 var MC_BODY_SAVE = JSON.stringify({
                 name: "PDF from custum activity",
@@ -254,15 +262,15 @@ exports.validate = function (req, res) {
     });
 };
 
-function httpRequest( optionsParam, postData ) {
+function getTokenFromMC( optionsParam, postData ) {
         console.log(optionsParam);
         var req = https.request(optionsParam, function( res ) {
-            console.log('before status');
+
             // reject on bad status
             if ( res.statusCode < 200 || res.statusCode >= 300 ) {
                 new Error('statusMessage=' + res.statusMessage);
             }
-            console.log('before status');
+
             // process data
             var body = '';
             res.on('data', function( chunk ) {
@@ -273,21 +281,13 @@ function httpRequest( optionsParam, postData ) {
                     var bodyToString = body.toString();
                     var bodyToJson = JSON.parse(bodyToString);
 
-                    console.log('here is response')
-                    console.log(bodyToJson);
-                    result.pdf_result = bodyToJson;
                     tokens.mc_token = bodyToJson.access_token;
                     tokens.mc_expires_in = bodyToJson.expires_in;
-                    
-                    
-
                 } catch(e) {
                    new Error('277-> error: ' + e);
                 }
                 
             });
-
-            console.log('end of request');
         });
         req.on('error', function( err ) {
             console.log('283 -> error: ', err);
@@ -299,9 +299,9 @@ function httpRequest( optionsParam, postData ) {
         req.end();
 }
 
-function getOption(toUseFor) {
+function getOptionFor(useFor) {
 
-    if(toUseFor == 'MC_AUTH') {
+    if(useFor == 'MC_AUTH') {
         var MC_OAUTH_HEADERS = {
             'Content-Type': 'application/json'
         };
@@ -315,7 +315,7 @@ function getOption(toUseFor) {
         };
 
         return mcOptions;
-    }else if(toUseFor == 'PDF') {
+    }else if(useFor == 'retrieve_PDF') {
         var PDF_HEADERS = {
             'Authorization': 'Bearer ' + FERRATUM_CACHE.get('f_token')
         };
@@ -328,9 +328,9 @@ function getOption(toUseFor) {
             headers: PDF_HEADERS
         };
         return PDF_Options;
-    }else if(toUseFor == 'save') {
+    }else if(useFor == 'save_PDF') {
         var MC_HEADERS = {
-            'Authorization': 'Bearer ' + tokens.mc_token
+            'Authorization': 'Bearer ' + MC_CACHE.get('mc_token')
         };
 
         var MC_Option = {
@@ -346,12 +346,12 @@ function getOption(toUseFor) {
 
 
 }
-function getTokenFromFerratum(){
+function getTokenFromFerratum(id, secret){
 
             var form = new FormData();
             form.append('grant_type', 'client_credentials');
-            form.append('client_id', 'C-ASSET_REGISTRY');
-            form.append('client_secret', '4GWs5w3wpTc');
+            form.append('client_id', id);
+            form.append('client_secret', secret);
 
             console.log('First get token from Ferratum---------------')
            
