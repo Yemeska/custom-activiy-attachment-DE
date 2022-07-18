@@ -127,9 +127,9 @@ exports.execute = function (req, res) {
 
             if(FERRATUM_CACHE) {
             getTokenFromFerratum();
-                setTimeout(() => {
+            setTimeout(() => {
                 FERRATUM_CACHE.set('f_token', tokens.ferratum_token, tokens.ferratum_token_expires_in - 500);
-                }, 500);
+            }, 1000);
             };
 
             let pdfOption;
