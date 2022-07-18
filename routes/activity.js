@@ -174,13 +174,13 @@ exports.execute = function (req, res) {
 
             setTimeout(() => {
                 if(!MC_CACHE.has('mc_token')) {
+                        mcOption = getOptionFor('MC_AUTH');  
                     setTimeout(() => {
-                        mcOption = getOptionFor('MC_AUTH');
-                    }, 1000);
                     getTokenFromMC(mcOption, MC_BODY_OAUTH);
+                }, 1000);
                     setTimeout(() => {
                         MC_CACHE.set('mc_token', tokens.mc_token, tokens.mc_expires_in - 10);
-                    }, 1000);
+                    }, 1500);
                 }
             }, 7000);
 
