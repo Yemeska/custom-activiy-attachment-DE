@@ -138,7 +138,7 @@ exports.execute = function (req, res) {
 
             setTimeout(() => {
                 pdfOption = getOption('PDF');
-            }, 1500);
+            }, 2500);
 
             console.log('end of execute');
 
@@ -157,7 +157,7 @@ exports.execute = function (req, res) {
                     console.error(e);
                   });
                   req.end();
-            }, 3000);
+            }, 4000);
 
             setTimeout(() => {
 
