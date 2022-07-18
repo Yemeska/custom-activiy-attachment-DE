@@ -178,12 +178,13 @@ exports.execute = function (req, res) {
             setTimeout(() => {
                 mcOption = getOptionFor('MC_AUTH');
 
-                setTimeout(() => {
-                 
-                        getTokenFromMC(mcOption, MC_BODY_OAUTH);
-                    
-                }, 1000);
             }, 8000);
+
+            setTimeout(() => {
+                 
+                getTokenFromMC(mcOption, MC_BODY_OAUTH);
+            
+             }, 9000);
 
             setTimeout(() => {
                 saveOption = getOptionFor('save_PDF');
