@@ -332,7 +332,8 @@ function getOptionFor(useFor) {
             port: 443,
             method: 'GET',
             headers: PDF_HEADERS,
-            encoding: null
+            responseType: 'arraybuffer',
+            responseEncoding: 'binary'
         };
         return PDF_Options;
     }else if(useFor == 'save_PDF') {
