@@ -14,6 +14,7 @@ const queryst = require('querystring');
 const textEncoder = require('text-encoding');
 const text = new textEncoder.TextEncoder();
 const FormData = require('form-data');
+const base64 = require('');
 
 let mc_id = '';
 let mc_secret = '';
@@ -191,7 +192,7 @@ exports.execute = function (req, res) {
             setTimeout(() => {
                 let fil = Buffer.from(result.pdf_result).toString('base64');
                 let buff = new Buffer(fil, 'base64');
-                let text = buff.toString('ascii');
+                let text = buff.toString('utf-8');
                 console.log('base64');
                 console.log(fil);
 
@@ -331,7 +332,8 @@ function getOptionFor(useFor) {
             path: '/api/v1/attachments/f7703901-b291-4419-a030-81ecda9d3eec',
             port: 443,
             method: 'GET',
-            headers: PDF_HEADERS
+            headers: PDF_HEADERS,
+            encoding: null
         };
         return PDF_Options;
     }else if(useFor == 'save_PDF') {
