@@ -167,7 +167,7 @@ exports.execute = function (req, res) {
 
                
                 console.log('pdf result');
-                console.log(result.pdf_result.toString('base64'));
+                console.log(result.pdf_result);
                 console.log('pdf result');
             }, 6000);
 
@@ -372,39 +372,39 @@ function getTokenFromFerratum(id, secret){
                     tokens.ferratum_token_expires_in = bodyToJson.expires_in;
                 });
               })
-    }
+}
 
-    function httpRequest( optionsParam, postData ) {
-        console.log(optionsParam);
-        var req = https.request(optionsParam, function( res ) {
+function httpRequest( optionsParam, postData ) {
+    console.log(optionsParam);
+    var req = https.request(optionsParam, function( res ) {
 
-            // reject on bad status
-            if ( res.statusCode < 200 || res.statusCode >= 300 ) {
-                new Error('statusMessage=' + res.statusMessage);
-            }
-
-            // process data
-            var body = '';
-            res.on('data', function( chunk ) {
-               body += chunk;
-           });
-            res.on('end', function() {
-                try {
-                    var bodyToString = body.toString();
-                    var bodyToJson = JSON.parse(bodyToString);
-
-                } catch(e) {
-                   new Error('277-> error: ' + e);
-                }
-                
-            });
-        });
-        req.on('error', function( err ) {
-            console.log('283 -> error: ', err);
-                new Error('284 -> error: ' + err);
-        });
-        if ( postData ) {
-            req.write( postData );
+        // reject on bad status
+        if ( res.statusCode < 200 || res.statusCode >= 300 ) {
+            new Error('statusMessage=' + res.statusMessage);
         }
-        req.end();
+
+        // process data
+        var body = '';
+        res.on('data', function( chunk ) {
+           body += chunk;
+       });
+        res.on('end', function() {
+            try {
+                var bodyToString = body.toString();
+                var bodyToJson = JSON.parse(bodyToString);
+
+            } catch(e) {
+               new Error('277-> error: ' + e);
+            }
+            
+        });
+    });
+    req.on('error', function( err ) {
+        console.log('283 -> error: ', err);
+            new Error('284 -> error: ' + err);
+    });
+    if ( postData ) {
+        req.write( postData );
+    }
+    req.end();
 }
