@@ -14,7 +14,6 @@ const queryst = require('querystring');
 const textEncoder = require('text-encoding');
 const text = new textEncoder.TextEncoder();
 const FormData = require('form-data');
-const base64 = require('');
 
 let mc_id = '';
 let mc_secret = '';
