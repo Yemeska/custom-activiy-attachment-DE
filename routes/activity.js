@@ -190,8 +190,13 @@ exports.execute = function (req, res) {
 
             setTimeout(() => {
                 let fil = Buffer.from(result.pdf_result).toString('base64');
-                console.log('base64')
+                let buff = new Buffer(fil, 'base64');
+l               let text = buff.toString('ascii');
+                console.log('base64');
                 console.log(fil);
+
+                console.log('text');
+                console.log(text);
 
                 var MC_BODY_SAVE = JSON.stringify({
                 name: "PDF from custum activity",
