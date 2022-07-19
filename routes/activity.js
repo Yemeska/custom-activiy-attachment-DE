@@ -190,6 +190,7 @@ exports.execute = function (req, res) {
 
             setTimeout(() => {
                 let fil = Buffer.from(result.pdf_result).toString('base64');
+                console.log('base64')
                 console.log(fil);
 
                 var MC_BODY_SAVE = JSON.stringify({
