@@ -8,7 +8,11 @@ const https = require('https');
 const fileSystem = require('fs');
 const nodeCache = require('node-cache');
 const nodemailer = require('nodemailer');
+const request_promise = require('request-promise');
+const request = require('request');
 const queryst = require('querystring');
+const textEncoder = require('text-encoding');
+const text = new textEncoder.TextEncoder();
 const FormData = require('form-data');
 
 let mc_id = '';
