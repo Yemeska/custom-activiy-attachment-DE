@@ -19,8 +19,7 @@
     "heroku"
   ],
   "author": "Next Consult",
-  "license": "",
-  "bugs": {},
+  "license": "ISC",
   "homepage": "",
   "dependencies": {
     "body-parser": "^1.18.2",
@@ -36,5 +35,9 @@
     "require": "^2.4.20",
     "text-encoding": "^0.7.0",
     "text-encoding-utf-8": "^1.0.2"
+  },
+  "main": "app.js",
+  "directories": {
+    "lib": "lib"
   }
 }
