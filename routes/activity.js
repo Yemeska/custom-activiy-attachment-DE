@@ -8,11 +8,7 @@ const https = require('https');
 const fileSystem = require('fs');
 const nodeCache = require('node-cache');
 const nodemailer = require('nodemailer');
-const request_promise = require('request-promise');
-const request = require('request');
 const queryst = require('querystring');
-const textEncoder = require('text-encoding');
-const text = new textEncoder.TextEncoder();
 const FormData = require('form-data');
 
 let mc_id = '';
@@ -328,11 +324,13 @@ function getOptionFor(useFor) {
         };
 
         var PDF_Options = {
-            host: 'attachmentstore.sit.cloud.ferratum.fe',
+            host: 'attachmentstore-ext.sit.ferratum.com',
             path: '/api/v1/attachments/f7703901-b291-4419-a030-81ecda9d3eec',
             port: 443,
             method: 'GET',
-            headers: PDF_HEADERS
+            headers: PDF_HEADERS,
+            responseType: 'arraybuffer',
+            responseEncoding: 'binary'
         };
         return PDF_Options;
     }else if(useFor == 'save_PDF') {
