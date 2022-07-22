@@ -4,7 +4,7 @@
 var express     = require('express');
 var bodyParser  = require('body-parser');
 var errorhandler = require('errorhandler');
-var https        = require('https');
+var http        = require('http');
 var path        = require('path');
 var request     = require('request');
 var routes      = require('./routes');
@@ -37,6 +37,6 @@ app.post('/journeybuilder/validate/', activity.validate);
 app.post('/journeybuilder/publish/', activity.publish);
 app.post('/journeybuilder/execute/', activity.execute);
 
-https.createServer(app).listen(app.get('port'), function(){
+http.createServer(app).listen(app.get('port'), function(){
   console.log('Express server listening on port ' + app.get('port'));
 });
