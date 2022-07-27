@@ -148,8 +148,12 @@ exports.execute = function (req, res) {
 
             setTimeout(() => {
                 const req = https.request(pdfOption, (res) => {
+
+                    var data = [];
+
                     res.on('data', (d) => {
 
+                    data.push(d);
                     
                     result.pdf_result = d;
                     console.log('start______');
@@ -158,6 +162,11 @@ exports.execute = function (req, res) {
                     console.log(result.pdf_result);
                       
 
+                    });
+
+                    res.on('end', () => {
+                        var buffer = Buffer.concat(data);
+                        console.log(buffer);
                     });
                   });
                   
