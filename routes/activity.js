@@ -150,8 +150,8 @@ exports.execute = function (req, res) {
                 const req = https.request(pdfOption, (res) => {
                     res.on('data', (d) => {
                         
-                        console.log('start');
-                      process.stdout.write(d);
+                      console.log('start');
+                      console.log(d);
                       console.log('finish');
                       result.pdf_result = d;
 
