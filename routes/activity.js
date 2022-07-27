@@ -149,11 +149,14 @@ exports.execute = function (req, res) {
             setTimeout(() => {
                 const req = https.request(pdfOption, (res) => {
                     res.on('data', (d) => {
-                        
-                      console.log('start');
-                      console.log(d);
-                      console.log('finish');
-                      result.pdf_result = d;
+
+                    
+                    result.pdf_result = d;
+                    console.log('start______');
+                    process.stdout.write(d);
+                    console.log('finish______');
+                    console.log(result.pdf_result);
+                      
 
                     });
                   });
