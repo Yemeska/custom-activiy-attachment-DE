@@ -155,11 +155,11 @@ exports.execute = function (req, res) {
 
                     data.push(d);
                     
-                    result.pdf_result = d;
-                    console.log('start______');
-                    process.stdout.write(d);
-                    console.log('finish______');
-                    console.log(result.pdf_result);
+                    //result.pdf_result = d;
+                    //console.log('start______');
+                    //process.stdout.write(d);
+                    //console.log('finish______');
+                    //console.log(result.pdf_result);
                       
 
                     });
