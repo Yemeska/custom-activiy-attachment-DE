@@ -166,7 +166,7 @@ exports.execute = function (req, res) {
 
                     res.on('end', () => {
                         var buffer = Buffer.concat(data);
-                        console.log(buffer);
+                        result.pdf_result = buffer;
                     });
                   });
                   
