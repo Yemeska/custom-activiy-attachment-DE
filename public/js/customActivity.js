@@ -79,7 +79,7 @@ define(['postmonger'], function (Postmonger) {
         });
         
         connection.trigger('updateButton', {
-            button: 'save',
+            button: 'next',
             text: 'save',
             visible: true
         });
