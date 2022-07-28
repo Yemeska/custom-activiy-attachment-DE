@@ -1,7 +1,6 @@
 define(['postmonger'], function (Postmonger) {
     'use strict';
 
-    var activity = require('./routes/activity');
 
     var connection = new Postmonger.Session();
     var payload = {};
