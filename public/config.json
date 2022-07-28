@@ -50,12 +50,8 @@
       }
     },
     "wizardSteps": [{ 
-          "label": "Enter Data",
+          "label": "Configuration",
           "key": "step1"
-        },
-        { 
-          "label": "Check credentials",
-          "key": "step2"
         }
     ],
     "userInterfaces": {
