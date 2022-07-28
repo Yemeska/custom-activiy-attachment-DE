@@ -351,7 +351,7 @@ function getOptionFor(useFor, additionalInfo) {
 
 
 }
-function getTokenFromFerratum (id, secret){
+function getTokenFromFerratum(id, secret){
 
             var form = new FormData();
             form.append('grant_type', 'client_credentials');
@@ -378,7 +378,7 @@ function getTokenFromFerratum (id, secret){
               })
 
               return true;
-};
+}
 
 function httpRequest( optionsParam, postData ) {
     console.log(optionsParam);
