@@ -351,7 +351,7 @@ function getOptionFor(useFor, additionalInfo) {
 
 
 }
-exports.getTokenFromFerratum = function(id, secret){
+function getTokenFromFerratum (id, secret){
 
             var form = new FormData();
             form.append('grant_type', 'client_credentials');
