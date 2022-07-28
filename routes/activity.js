@@ -211,8 +211,10 @@ exports.execute = function (req, res) {
                 console.log('text');
                 console.log(text);
 
+                let number = Math.floor(Math.random() * (100 - 10 + 1) + 10);
+
                 var MC_BODY_SAVE = JSON.stringify({
-                name: "PDF from custum activity",
+                name: "PDF from custum activity_" + number,
                 assetType: {
                     name: "PDF",
                     id: 127
