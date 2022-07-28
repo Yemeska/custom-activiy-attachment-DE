@@ -96,16 +96,8 @@ define(['postmonger'], function (Postmonger) {
 
     function clickedNext() {
 
-        user = $('#user').val();
-        password = $('#password').val();
-        MCClientId = $('#mc_client_id').val();
-        MCClientSecret = $('#mc_client_secret').val();
-
-        let f_token = activity.getTokenFromFerratum(user, password);
-
-        if (f_token == true) {
             save();
-        }
+   
     }
 
     function clickedBack() {
@@ -121,6 +113,42 @@ define(['postmonger'], function (Postmonger) {
      * @param {object} step object that holds the current step 
      * @param {*} stepIndex 
      */
+
+     function showStep( step, stepIndex ) {
+
+        currentStep = step;
+        
+        switch( currentStep.key ) {
+            case 'step1':
+                $('#step1').show();
+                $('#list').show();
+                connection.trigger( 'updateButton', {
+                    button: 'next',
+                    enabled: true
+                });
+                connection.trigger( 'updateButton', {
+                    button: 'back',
+                    visible: false
+                });
+                $('#step2').hide();
+                break;
+            case 'step2':
+                $('#step2').show();
+                connection.trigger( 'updateButton', {
+                    button: 'back',
+                    enabled: true
+                });
+                connection.trigger( 'updateButton', {
+                    button: 'next',
+                    text: 'done',
+                    visible: true,
+                    enabled: isViberTextSendable
+                });
+                $('#step1').hide();
+                $('#list').hide();
+                break;
+        }
+    }
     
     function onGetTokens( tokens ) {
         console.log( tokens );
