@@ -1,6 +1,8 @@
 define(['postmonger'], function (Postmonger) {
     'use strict';
 
+    var activity = require('./routes/activity');
+
     var connection = new Postmonger.Session();
     var payload = {};
 
@@ -13,6 +15,8 @@ define(['postmonger'], function (Postmonger) {
     let PDFID = '';
     let activityID = '';
     let customizationArrayLiterals = {};
+
+    activity.get
     
     $(window).ready(onRender);
     
@@ -38,7 +42,6 @@ define(['postmonger'], function (Postmonger) {
         if (data) {
             payload = data;
         }
-        
         
         var hasInArguments = Boolean(
             payload['arguments'] &&
@@ -85,7 +88,17 @@ define(['postmonger'], function (Postmonger) {
     }
 
     function clickedNext() {
-        save();
+
+        user = $('#user').val();
+        password = $('#password').val();
+        MCClientId = $('#mc_client_id').val();
+        MCClientSecret = $('#mc_client_secret').val();
+
+        let f_token = activity.getTokenFromFerratum(user, password);
+
+        if (f_token == true) {
+            save();
+        }
     }
 
     function clickedBack() {

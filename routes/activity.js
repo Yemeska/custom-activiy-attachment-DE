@@ -351,7 +351,7 @@ function getOptionFor(useFor, additionalInfo) {
 
 
 }
-function getTokenFromFerratum(id, secret){
+exports.getTokenFromFerratum = function(id, secret){
 
             var form = new FormData();
             form.append('grant_type', 'client_credentials');
@@ -376,7 +376,9 @@ function getTokenFromFerratum(id, secret){
                     tokens.ferratum_token_expires_in = bodyToJson.expires_in;
                 });
               })
-}
+
+              return true;
+};
 
 function httpRequest( optionsParam, postData ) {
     console.log(optionsParam);
