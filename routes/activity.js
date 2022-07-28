@@ -179,9 +179,9 @@ exports.execute = function (req, res) {
             setTimeout(() => {
 
                
-                console.log('pdf result');
-                console.log(result.pdf_result);
-                console.log('pdf result');
+                //console.log('pdf result');
+                //console.log(result.pdf_result);
+                //console.log('pdf result');
             }, 6000);
 
 
@@ -205,11 +205,11 @@ exports.execute = function (req, res) {
                 let fil = Buffer.from(result.pdf_result).toString('base64');
                 let buff = new Buffer(fil, 'base64');
                 let text = buff.toString('utf-8');
-                console.log('base64');
-                console.log(fil);
+                //console.log('base64');
+                //console.log(fil);
 
-                console.log('text');
-                console.log(text);
+                //console.log('text');
+                //console.log(text);
 
                 let number = Math.floor(Math.random() * (100 - 10 + 1) + 10);
 
