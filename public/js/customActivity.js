@@ -122,7 +122,7 @@ define(['postmonger'], function (Postmonger) {
                 $('#step1').show();
                 $('#list').show();
                 connection.trigger( 'updateButton', {
-                    button: 'next',
+                    button: 'save',
                     enabled: true
                 });
                 connection.trigger( 'updateButton', {
