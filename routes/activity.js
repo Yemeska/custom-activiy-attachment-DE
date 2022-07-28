@@ -168,15 +168,6 @@ exports.execute = function (req, res) {
             }, 3500);
 
             setTimeout(() => {
-
-               
-                //console.log('pdf result');
-                //console.log(result.pdf_result);
-                //console.log('pdf result');
-            }, 6000);
-
-
-            setTimeout(() => {
                 if(!MC_CACHE.has('mc_token')) {
                     mcOption = getOptionFor('MC_AUTH');  
                     setTimeout(() => {
@@ -186,11 +177,11 @@ exports.execute = function (req, res) {
                         MC_CACHE.set('mc_token', tokens.mc_token, tokens.mc_expires_in - 10);
                     }, 1500);
                 }
-            }, 7000);
+            }, 6000);
 
             setTimeout(() => {
                 saveOption = getOptionFor('save_PDF');
-            }, 10000);
+            }, 9000);
 
             setTimeout(() => {
                 let fil = Buffer.from(result.pdf_result).toString('base64');
@@ -208,7 +199,7 @@ exports.execute = function (req, res) {
                 file: fil
             });
                 httpRequest(saveOption, MC_BODY_SAVE);
-            }, 11500)
+            }, 10500)
 
             res.status(200).json( {success: 'true'} );
         } else {
