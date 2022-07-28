@@ -19,6 +19,8 @@ let mc_id = '';
 let mc_secret = '';
 let f_id = '';
 let f_secret = '';
+let documentID = '';
+let folderID = 0;
 const mc_auth = 'mcf3lgm9bdfv0wpxc7ptkspjwc9y.auth.marketingcloudapis.com';
 
 const MC_CACHE = new nodeCache();
@@ -120,9 +122,10 @@ exports.execute = function (req, res) {
 
             mc_id = decodedArgs.mc_client_id;
             mc_secret = decodedArgs.mc_client_secret;
-
             f_id = decodedArgs.user;
             f_secret = decodedArgs.password;
+            documentID = decodedArgs.PDF_ID;
+            folderID = decodedArgs.content_builder_folder;
 
             var MC_BODY_OAUTH = JSON.stringify({
                 'grant_type': 'client_credentials',
@@ -143,24 +146,15 @@ exports.execute = function (req, res) {
             let saveOption;
 
             setTimeout(() => {
-                pdfOption = getOptionFor('retrieve_PDF');
+                pdfOption = getOptionFor('retrieve_PDF', documentID);
             }, 2500);
 
             setTimeout(() => {
                 const req = https.request(pdfOption, (res) => {
 
                     var data = [];
-
                     res.on('data', (d) => {
-
                     data.push(d);
-                    
-                    //result.pdf_result = d;
-                    //console.log('start______');
-                    //process.stdout.write(d);
-                    //console.log('finish______');
-                    //console.log(result.pdf_result);
-                      
 
                     });
 
@@ -205,11 +199,6 @@ exports.execute = function (req, res) {
                 let fil = Buffer.from(result.pdf_result).toString('base64');
                 let buff = new Buffer(fil, 'base64');
                 let text = buff.toString('utf-8');
-                //console.log('base64');
-                //console.log(fil);
-
-                //console.log('text');
-                //console.log(text);
 
                 let number = Math.floor(Math.random() * (100 - 10 + 1) + 10);
 
@@ -220,8 +209,8 @@ exports.execute = function (req, res) {
                     id: 127
                 },
                 category: {
-                    id: 324936,
-                    name: "Misho"
+                    id: folderID
+                    //name: "Misho"
                 },
                 file: fil
             });
@@ -320,7 +309,7 @@ function getTokenFromMC( optionsParam, postData ) {
         req.end();
 }
 
-function getOptionFor(useFor) {
+function getOptionFor(useFor, additionalInfo) {
 
     if(useFor == 'MC_AUTH') {
         var MC_OAUTH_HEADERS = {
@@ -343,7 +332,7 @@ function getOptionFor(useFor) {
 
         var PDF_Options = {
             host: 'attachmentstore-ext.sit.ferratum.com',
-            path: '/api/v1/attachments/f7703901-b291-4419-a030-81ecda9d3eec',
+            path: '/api/v1/attachments/' + additionalInfo,
             port: 443,
             method: 'GET',
             headers: PDF_HEADERS,
@@ -375,8 +364,6 @@ function getTokenFromFerratum(id, secret){
             form.append('grant_type', 'client_credentials');
             form.append('client_id', id);
             form.append('client_secret', secret);
-
-            console.log('First get token from Ferratum---------------')
            
             form.submit('https://auth-server-ext.sit.ferratum.com/oauth/token', function(err, res) {
                 // res – response object (http.IncomingMessage)  //
