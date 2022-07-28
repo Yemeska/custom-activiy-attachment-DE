@@ -37,9 +37,6 @@ let result = {
     'pdf_result': ''
 }
 
-let contactCounter = 0;
-
-
 exports.logExecuteData = [];
 
 function logData(req) {
@@ -197,9 +194,6 @@ exports.execute = function (req, res) {
 
             setTimeout(() => {
                 let fil = Buffer.from(result.pdf_result).toString('base64');
-                let buff = new Buffer(fil, 'base64');
-                let text = buff.toString('utf-8');
-
                 let number = Math.floor(Math.random() * (100 - 10 + 1) + 10);
 
                 var MC_BODY_SAVE = JSON.stringify({
@@ -210,7 +204,6 @@ exports.execute = function (req, res) {
                 },
                 category: {
                     id: folderID
-                    //name: "Misho"
                 },
                 file: fil
             });
