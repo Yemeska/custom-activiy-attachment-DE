@@ -5,13 +5,6 @@ define(['postmonger'], function (Postmonger) {
     var connection = new Postmonger.Session();
     var payload = {};
 
-    var requestedInteractionDefaults = {}; // object returned from requestedInteractionDefaults
-    let steps = [ 
-        { "label": "Enter Data", "key": "step1" },
-        { "label": "Check credentials", "key": "step2" }
-    ];
-    
-    let currentStep = steps[0].key;
 
     let user = '';
     let password = '';
@@ -113,41 +106,6 @@ define(['postmonger'], function (Postmonger) {
      * @param {*} stepIndex 
      */
 
-     function showStep( step, stepIndex ) {
-
-        currentStep = step;
-        
-        switch( currentStep.key ) {
-            case 'step1':
-                $('#step1').show();
-                $('#list').show();
-                connection.trigger( 'updateButton', {
-                    button: 'save',
-                    enabled: true
-                });
-                connection.trigger( 'updateButton', {
-                    button: 'back',
-                    visible: false
-                });
-                $('#step2').hide();
-                break;
-            case 'step2':
-                $('#step2').show();
-                connection.trigger( 'updateButton', {
-                    button: 'back',
-                    enabled: true
-                });
-                connection.trigger( 'updateButton', {
-                    button: 'next',
-                    text: 'done',
-                    visible: true,
-                    enabled: isViberTextSendable
-                });
-                $('#step1').hide();
-                $('#list').hide();
-                break;
-        }
-    }
     
     function onGetTokens( tokens ) {
         console.log( tokens );
