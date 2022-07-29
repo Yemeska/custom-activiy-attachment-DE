@@ -148,11 +148,6 @@ exports.execute = function (req, res) {
             console.log(documentIDs);
 
             setTimeout(() => {
-                pdfOption = getOptionFor('retrieve_PDF', documentIDs.pop());
-            }, 2500);
-
-
-            setTimeout(() => {
                 let currentID = documentIDs.pop()
                 pdfOption = getOptionFor('retrieve_PDF', currentID);
                 setTimeout(() => {
@@ -201,7 +196,6 @@ exports.execute = function (req, res) {
             setTimeout(() => {
                 let pdfToSave = result.pdf_result.pop();
                 let fil = Buffer.from(pdfToSave.buffer).toString('base64');
-                let number = Math.floor(Math.random() * (100 - 10 + 1) + 10);
 
                 var MC_BODY_SAVE = JSON.stringify({
                 name: pdfToSave.id,
