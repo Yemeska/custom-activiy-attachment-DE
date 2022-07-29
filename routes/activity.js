@@ -153,7 +153,10 @@ exports.execute = function (req, res) {
 
 
             setTimeout(() => {
-                console.log(pdfOption);
+                let currentID = documentIDs.pop()
+                pdfOption = getOptionFor('retrieve_PDF', currentID);
+                setTimeout(() => {
+                    console.log(pdfOption);
                 const req = https.request(pdfOption, (res) => {
 
                     var data = [];
@@ -164,7 +167,11 @@ exports.execute = function (req, res) {
 
                     res.on('end', () => {
                         var buffer = Buffer.concat(data);
-                        result.pdf_result.push(buffer);
+                        let pdfData = {
+                            'buffer': buffer,
+                            'id': currentID
+                        }
+                        result.pdf_result.push(pdfData);
                     });
                   });
                   
@@ -172,7 +179,8 @@ exports.execute = function (req, res) {
                     console.error(e);
                   });
                   req.end();
-            }, 3500);
+                }, 1500);
+            }, 2500);
 
             setTimeout(() => {
                 if(!MC_CACHE.has('mc_token')) {
@@ -191,11 +199,12 @@ exports.execute = function (req, res) {
             }, 9000);
 
             setTimeout(() => {
-                let fil = Buffer.from(result.pdf_result.pop()).toString('base64');
+                let pdfToSave = result.pdf_result.pop();
+                let fil = Buffer.from(pdfToSave.buffer).toString('base64');
                 let number = Math.floor(Math.random() * (100 - 10 + 1) + 10);
 
                 var MC_BODY_SAVE = JSON.stringify({
-                name: "PDF from custum activity_" + number,
+                name: pdfToSave.id,
                 assetType: {
                     name: "PDF",
                     id: 127
