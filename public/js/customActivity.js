@@ -87,9 +87,7 @@ define(['postmonger'], function (Postmonger) {
     }
 
     function clickedNext() {
-
-            save();
-   
+            save(); 
     }
 
     function clickedBack() {

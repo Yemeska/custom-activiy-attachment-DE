@@ -142,6 +142,8 @@ exports.execute = function (req, res) {
             let mcOption;
             let saveOption;
 
+            console.log(documentID);
+
             setTimeout(() => {
                 pdfOption = getOptionFor('retrieve_PDF', documentID);
             }, 2500);
