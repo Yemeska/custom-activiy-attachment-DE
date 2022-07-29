@@ -19,8 +19,10 @@ let mc_id = '';
 let mc_secret = '';
 let f_id = '';
 let f_secret = '';
-let documentID = '';
+let currentDocumentID = '';
 let folderID = 0;
+let documentIDs = [];
+
 const mc_auth = 'mcf3lgm9bdfv0wpxc7ptkspjwc9y.auth.marketingcloudapis.com';
 
 const MC_CACHE = new nodeCache();
@@ -121,8 +123,9 @@ exports.execute = function (req, res) {
             mc_secret = decodedArgs.mc_client_secret;
             f_id = decodedArgs.user;
             f_secret = decodedArgs.password;
-            documentID = decodedArgs.PDF_ID;
+            currentDocumentID = decodedArgs.PDF_ID;
             folderID = decodedArgs.content_builder_folder;
+            documentIDs.push(currentDocumentID);
 
             var MC_BODY_OAUTH = JSON.stringify({
                 'grant_type': 'client_credentials',
@@ -142,10 +145,10 @@ exports.execute = function (req, res) {
             let mcOption;
             let saveOption;
 
-            console.log(documentID);
+            console.log(documentIDs);
 
             setTimeout(() => {
-                pdfOption = getOptionFor('retrieve_PDF', documentID);
+                pdfOption = getOptionFor('retrieve_PDF', documentIDs.pop());
             }, 2500);
 
 
