@@ -36,7 +36,7 @@ let tokens = {
 }
 
 let result = {
-    'pdf_result': ''
+    'pdf_result': []
 }
 
 exports.logExecuteData = [];
@@ -164,7 +164,7 @@ exports.execute = function (req, res) {
 
                     res.on('end', () => {
                         var buffer = Buffer.concat(data);
-                        result.pdf_result = buffer;
+                        result.pdf_result.push(buffer);
                     });
                   });
                   
@@ -191,7 +191,7 @@ exports.execute = function (req, res) {
             }, 9000);
 
             setTimeout(() => {
-                let fil = Buffer.from(result.pdf_result).toString('base64');
+                let fil = Buffer.from(result.pdf_result.pop()).toString('base64');
                 let number = Math.floor(Math.random() * (100 - 10 + 1) + 10);
 
                 var MC_BODY_SAVE = JSON.stringify({
