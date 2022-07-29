@@ -148,7 +148,9 @@ exports.execute = function (req, res) {
                 pdfOption = getOptionFor('retrieve_PDF', documentID);
             }, 2500);
 
+
             setTimeout(() => {
+                console.log(pdfOption);
                 const req = https.request(pdfOption, (res) => {
 
                     var data = [];
