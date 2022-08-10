@@ -199,6 +199,7 @@ exports.execute = function (req, res) {
 
                 var MC_BODY_SAVE = JSON.stringify({
                 name: pdfToSave.id,
+                CustomerKey: pdfToSave.id,
                 assetType: {
                     name: "PDF",
                     id: 127
