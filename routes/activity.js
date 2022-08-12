@@ -130,7 +130,8 @@ exports.execute = function (req, res) {
             var MC_BODY_OAUTH = JSON.stringify({
                 'grant_type': 'client_credentials',
                 'client_id': mc_id,
-                'client_secret': mc_secret
+                'client_secret': mc_secret,
+                "account_id": "7277530"
             });
 
            if(!FERRATUM_CACHE.has('f_token')) {
