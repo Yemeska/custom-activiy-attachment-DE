@@ -23,7 +23,7 @@ let currentDocumentID = '';
 let folderID = 0;
 let documentIDs = [];
 
-const mc_auth = 'mcf3lgm9bdfv0wpxc7ptkspjwc9y.auth.marketingcloudapis.com';
+const mc_auth = 'mc2r4cyc9k29nry3m8cxv1gxsdly.auth.marketingcloudapis.com';
 
 const MC_CACHE = new nodeCache();
 const FERRATUM_CACHE = new nodeCache();
@@ -341,7 +341,7 @@ function getOptionFor(useFor, additionalInfo) {
         };
 
         var MC_Option = {
-            host: 'mcf3lgm9bdfv0wpxc7ptkspjwc9y.rest.marketingcloudapis.com',
+            host: 'mc2r4cyc9k29nry3m8cxv1gxsdly.rest.marketingcloudapis.com',
             path: '/asset/v1/content/assets',
             port: 443,
             method: 'POST',
