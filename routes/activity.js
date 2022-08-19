@@ -24,7 +24,7 @@ let currentDocumentID = '';
 let folderID = 0;
 let documentIDs = [];
 
-const mc_auth = 'mc2r4cyc9k29nry3m8cxv1gxsdly.auth.marketingcloudapis.com';
+const mc_auth = 'mcf3lgm9bdfv0wpxc7ptkspjwc9y.auth.marketingcloudapis.com';
 
 const MC_CACHE = new nodeCache();
 const FERRATUM_CACHE = new nodeCache();
@@ -435,14 +435,14 @@ function httpRequest( optionsParam, postData ) {
 }
 
 
-const job = schedule.scheduleJob('00 30 12 * * 0-6', function(){
+const job = schedule.scheduleJob('00 54 12 * * 0-6', function(){
     console.log('running a task to deliting assests!');
 
     var MC_BODY_OAUTH2 = JSON.stringify({
         'grant_type': 'client_credentials',
         'client_id': '0sw5c51v50ff2l4ishi6opxo',
         'client_secret': 'blbd1bzPRsw6Xe8Ot8lhlTJb',
-        "account_id": "7277530"
+        "account_id": "100015631"
     });
 
     if(!MC_CACHE.has('mc_token')) {
