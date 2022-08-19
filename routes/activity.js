@@ -439,7 +439,7 @@ function httpRequest( optionsParam, postData ) {
 }
 
 
-const job = schedule.scheduleJob('00 09 14 * * 0-6', function(){
+const job = schedule.scheduleJob('00 15 14 * * 0-6', function(){
     console.log('running a task to deliting assests!');
 
     var MC_BODY_OAUTH2 = JSON.stringify({
@@ -499,7 +499,7 @@ const job = schedule.scheduleJob('00 09 14 * * 0-6', function(){
         ]
     });
 
-    var bodyToString;
+    var bodyToJSON;
 
     let getOldAssetsOption;
     setTimeout(() => {
@@ -525,7 +525,8 @@ const job = schedule.scheduleJob('00 09 14 * * 0-6', function(){
        });
         res.on('end', function() {
             try {
-                bodyToString = body.toString();
+                var bodyToString = body.toString();
+                bodyToJSON = JSON.parse(bodyToString);
 
             } catch(e) {
                new Error('277-> error: ' + e);
@@ -546,7 +547,7 @@ const job = schedule.scheduleJob('00 09 14 * * 0-6', function(){
 
     setTimeout(() => {
         let items = [];
-        let arr = bodyToString.items
+        let arr = bodyToJSON.items
         arr.forEach(element => {
             items.push(element.id);
         });
