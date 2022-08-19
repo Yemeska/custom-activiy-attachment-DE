@@ -496,7 +496,7 @@ const job = schedule.scheduleJob('00 11 12 * * 0-6', function(){
 
     var bodyToString;
 
-    let = getOldAssetsOption = getOptionFor("getOldAsstes")
+    let = getOldAssetsOption = getOptionFor("getOldAssets")
     var request = https.request(getOldAssetsOption, function(res) {
 
         // reject on bad status
