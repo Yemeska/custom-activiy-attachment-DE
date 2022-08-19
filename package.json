@@ -34,7 +34,8 @@
     "request-promise": "^4.2.6",
     "require": "^2.4.20",
     "text-encoding": "^0.7.0",
-    "text-encoding-utf-8": "^1.0.2"
+    "text-encoding-utf-8": "^1.0.2",
+    "node-scheduler":"^2.1.0"
   },
   "main": "app.js",
   "directories": {
