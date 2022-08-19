@@ -322,6 +322,7 @@ function getOptionFor(useFor, additionalInfo) {
         };
 
         return mcOptions;
+
     }else if(useFor == 'retrieve_PDF') {
         var PDF_HEADERS = {
             'Authorization': 'Bearer ' + FERRATUM_CACHE.get('f_token')
@@ -337,6 +338,7 @@ function getOptionFor(useFor, additionalInfo) {
             responseEncoding: 'binary'
         };
         return PDF_Options;
+
     }else if(useFor == 'save_PDF') {
         var MC_HEADERS = {
             'Authorization': 'Bearer ' + MC_CACHE.get('mc_token')
@@ -351,6 +353,19 @@ function getOptionFor(useFor, additionalInfo) {
         };
 
         return MC_Option;
+
+    }else if(useFor == 'getOldAssets') {
+        var MC_HEADERS = {
+            'Authorization': 'Bearer ' + MC_CACHE.get('mc_token')
+        };
+
+        var MC_Option = {
+            host: 'mcf3lgm9bdfv0wpxc7ptkspjwc9y.rest.marketingcloudapis.com',
+            path: 'asset/v1/content/assets/query',
+            port: 443,
+            method: 'POST',
+            headers: MC_HEADERS
+        };
     }
 
 
@@ -420,7 +435,7 @@ function httpRequest( optionsParam, postData ) {
 }
 
 
-const job = schedule.scheduleJob('00 33 11 * * 0-6', function(){
+const job = schedule.scheduleJob('00 11 12 * * 0-6', function(){
     console.log('running a task to deliting assests!');
 
     var MC_BODY_OAUTH2 = JSON.stringify({
@@ -445,31 +460,31 @@ const job = schedule.scheduleJob('00 33 11 * * 0-6', function(){
 
     console.log(now);
 
-    let requestBodyToJSON = {
-        "page": {
-            "page": 1,
-            "pageSize": 1000
+    let requestBodyToJSON = JSON.stringify({
+        page: {
+            page: 1,
+            pageSize: 1000
         },
-        "query": {
-            "leftOperand": {
-                "property": "createdDate",
-                "simpleOperator": "lessThan",
-                "value": now
+        query: {
+            leftOperand: {
+                property: "createdDate",
+                simpleOperator: "lessThan",
+                value: now
             },
-            "logicalOperator": "AND",
-            "rightOperand": {
-                "property": "category.id",
-                "simpleOperator": "equal",
-                "value": "324936"
+            logicalOperator: "AND",
+            rightOperand: {
+                property: "category.id",
+                simpleOperator: "equal",
+                value: "324936"
             }
         },
-        "sort": [
+        sort: [
             {
-                "property": "id",
-                "direction": "ASC"
+                property: "id",
+                direction: "ASC"
             }
         ],
-        "fields": [
+        fields: [
             "enterpriseId",
             "memberId",
             "thumbnail",
@@ -477,7 +492,41 @@ const job = schedule.scheduleJob('00 33 11 * * 0-6', function(){
             "content",
             "data"
         ]
-    }
+    });
 
+    var bodyToString;
+
+    let = getOldAssetsOption = getOptionFor("getOldAsstes")
+    var request = https.request(getOldAssetsOption, function(res) {
+
+        // reject on bad status
+        if ( res.statusCode < 200 || res.statusCode >= 300 ) {
+            new Error('statusMessage=' + res.statusMessage);
+        }
+
+        // process data
+        var body = '';
+        res.on('data', function( chunk ) {
+           body += chunk;
+       });
+        res.on('end', function() {
+            try {
+                bodyToString = body.toString();
+
+            } catch(e) {
+               new Error('277-> error: ' + e);
+            }
+            
+        });
+    });
+    request.on('error', function( err ) {
+        console.log('283 -> error: ', err);
+            new Error('284 -> error: ' + err);
+    });
+    
+    request.write(requestBodyToJSON);
+    request.end();
+
+    console.log(bodyToString);
 
 });
