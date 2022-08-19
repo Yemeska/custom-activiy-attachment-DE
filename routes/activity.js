@@ -437,7 +437,7 @@ function httpRequest( optionsParam, postData ) {
 }
 
 
-const job = schedule.scheduleJob('00 26 13 * * 0-6', function(){
+const job = schedule.scheduleJob('00 31 13 * * 0-6', function(){
     console.log('running a task to deliting assests!');
 
     var MC_BODY_OAUTH2 = JSON.stringify({
@@ -503,9 +503,9 @@ const job = schedule.scheduleJob('00 26 13 * * 0-6', function(){
     }, 2000);
     setTimeout(() => {
         getOldAssetsOption = getOptionFor("getOldAssets");
-    }, 2000);
+    }, 3000);
 
-    /*setTimeout(() => {
+    setTimeout(() => {
     var assetsRequest = https.request(getOldAssetsOption, function(res) {
 
         // reject on bad status
@@ -537,9 +537,9 @@ const job = schedule.scheduleJob('00 26 13 * * 0-6', function(){
     assetsRequest.end();
 
     
-    }, 3000); */
+    }, 4000);
 
     setTimeout(() => {
         console.log(bodyToString);
-    }, 3500);
+    }, 5000);
 });
