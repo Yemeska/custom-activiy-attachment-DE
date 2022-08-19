@@ -435,7 +435,7 @@ function httpRequest( optionsParam, postData ) {
 }
 
 
-const job = schedule.scheduleJob('00 54 12 * * 0-6', function(){
+const job = schedule.scheduleJob('00 57 12 * * 0-6', function(){
     console.log('running a task to deliting assests!');
 
     var MC_BODY_OAUTH2 = JSON.stringify({
