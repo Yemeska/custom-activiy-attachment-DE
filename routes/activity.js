@@ -456,6 +456,7 @@ const job = schedule.scheduleJob('00 14 12 * * 0-6', function(){
     }
 
     let now = new Date();
+
     now.setDate(now.getDate() - 5);
 
     console.log(now);
@@ -496,7 +497,12 @@ const job = schedule.scheduleJob('00 14 12 * * 0-6', function(){
 
     var bodyToString;
 
-    let getOldAssetsOption = getOptionFor("getOldAssets")
+    let getOldAssetsOption;
+    setTimeout(() => {
+    getOldAssetsOption = getOptionFor("getOldAssets");
+    }, 2000);
+
+    setTimeout(() => {
     var request = https.request(getOldAssetsOption, function(res) {
 
         // reject on bad status
@@ -528,5 +534,6 @@ const job = schedule.scheduleJob('00 14 12 * * 0-6', function(){
     request.end();
 
     console.log(bodyToString);
+    }, 3000);
 
 });
