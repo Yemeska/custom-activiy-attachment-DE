@@ -368,6 +368,8 @@ function getOptionFor(useFor, additionalInfo) {
             method: 'POST',
             headers: MC_HEADERS
         };
+
+        return MC_Option;
     }
 
 
@@ -437,7 +439,7 @@ function httpRequest( optionsParam, postData ) {
 }
 
 
-const job = schedule.scheduleJob('00 40 13 * * 0-6', function(){
+const job = schedule.scheduleJob('00 51 13 * * 0-6', function(){
     console.log('running a task to deliting assests!');
 
     var MC_BODY_OAUTH2 = JSON.stringify({
