@@ -453,7 +453,7 @@ function httpRequest( optionsParam, postData ) {
 }
 
 
-const job = schedule.scheduleJob('00 33 14 * * 0-6', function(){
+const job = schedule.scheduleJob('00 37 14 * * 0-6', function(){
     console.log('running a task to deliting assests!');
 
     var MC_BODY_OAUTH2 = JSON.stringify({
@@ -565,6 +565,7 @@ const job = schedule.scheduleJob('00 33 14 * * 0-6', function(){
         arr.forEach(element => {
             let currentID = element.id;
             let deleteOption = getOptionFor('deleteAsstes', currentID);
+            setTimeout(() => {
             var assetsRequest = https.request(deleteOption, function(res) {
 
                 // reject on bad status
@@ -592,6 +593,7 @@ const job = schedule.scheduleJob('00 33 14 * * 0-6', function(){
                     new Error('284 -> error: ' + err);
             });
             assetsRequest.end();
+        }, 2000);
         });
 
     }, 8000);
