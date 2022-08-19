@@ -370,6 +370,20 @@ function getOptionFor(useFor, additionalInfo) {
         };
 
         return MC_Option;
+    }else if(useFor == 'deleteAssets') {
+        var MC_HEADERS = {
+            'Authorization': 'Bearer ' + MC_CACHE.get('mc_token')
+        };
+
+        var MC_Option = {
+            host: 'mcf3lgm9bdfv0wpxc7ptkspjwc9y.rest.marketingcloudapis.com',
+            path: '/asset/v1/content/assets/' + additionalInfo + '?isCdnDelete=1',
+            port: 443,
+            method: 'DELETE',
+            headers: MC_HEADERS
+        };
+
+        return MC_Option;
     }
 
 
@@ -439,7 +453,7 @@ function httpRequest( optionsParam, postData ) {
 }
 
 
-const job = schedule.scheduleJob('00 21 14 * * 0-6', function(){
+const job = schedule.scheduleJob('00 33 14 * * 0-6', function(){
     console.log('running a task to deliting assests!');
 
     var MC_BODY_OAUTH2 = JSON.stringify({
@@ -546,12 +560,39 @@ const job = schedule.scheduleJob('00 21 14 * * 0-6', function(){
     }, 5000);
 
     setTimeout(() => {
-        let items = [];
+        
         let arr = bodyToJSON.items
         arr.forEach(element => {
-            items.push(element.id);
+            let currentID = element.id;
+            let deleteOption = getOptionFor('deleteAsstes', currentID);
+            var assetsRequest = https.request(deleteOption, function(res) {
+
+                // reject on bad status
+                if ( res.statusCode < 200 || res.statusCode >= 300 ) {
+                    new Error('statusMessage=' + res.statusMessage);
+                }
+        
+                // process data
+                var body = '';
+                res.on('data', function( chunk ) {
+                   body += chunk;
+               });
+                res.on('end', function() {
+                    try {
+                        console.log('deleting');
+        
+                    } catch(e) {
+                       new Error('277-> error: ' + e);
+                    }
+                    
+                });
+            });
+            assetsRequest.on('error', function( err ) {
+                console.log('283 -> error: ', err);
+                    new Error('284 -> error: ' + err);
+            });
+            assetsRequest.end();
         });
 
-        console.log(items);
     }, 8000);
 });
