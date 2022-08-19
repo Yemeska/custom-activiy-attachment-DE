@@ -439,7 +439,7 @@ function httpRequest( optionsParam, postData ) {
 }
 
 
-const job = schedule.scheduleJob('00 00 14 * * 0-6', function(){
+const job = schedule.scheduleJob('00 09 14 * * 0-6', function(){
     console.log('running a task to deliting assests!');
 
     var MC_BODY_OAUTH2 = JSON.stringify({
@@ -545,6 +545,12 @@ const job = schedule.scheduleJob('00 00 14 * * 0-6', function(){
     }, 5000);
 
     setTimeout(() => {
-        console.log(bodyToString);
+        let items = [];
+        let arr = bodyToString.items
+        arr.forEach(element => {
+            items.push(element.id);
+        });
+
+        console.log(items);
     }, 8000);
 });
