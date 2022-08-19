@@ -420,7 +420,7 @@ function httpRequest( optionsParam, postData ) {
 }
 
 
-const job = schedule.scheduleJob('00 13 11 * * 0-6', function(){
+const job = schedule.scheduleJob('00 15 11 * * 0-6', function(){
     console.log('running a task to deliting assests!');
 
     var MC_BODY_OAUTH2 = JSON.stringify({
@@ -441,7 +441,7 @@ const job = schedule.scheduleJob('00 13 11 * * 0-6', function(){
     }
 
     let now = new Date();
-    let getAssetsBefore = now.setDate(now.getDate() - 5);
+    let deleteBefore= now.setDate(now.getDate() - 5);
 
     console.log(deleteBefore);
 
