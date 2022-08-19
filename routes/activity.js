@@ -437,7 +437,7 @@ function httpRequest( optionsParam, postData ) {
 }
 
 
-const job = schedule.scheduleJob('00 35 13 * * 0-6', function(){
+const job = schedule.scheduleJob('00 40 13 * * 0-6', function(){
     console.log('running a task to deliting assests!');
 
     var MC_BODY_OAUTH2 = JSON.stringify({
@@ -508,6 +508,7 @@ const job = schedule.scheduleJob('00 35 13 * * 0-6', function(){
     }, 4000);
 
     setTimeout(() => {
+    console.log(getOldAssetsOption);
     var assetsRequest = https.request(getOldAssetsOption, function(res) {
 
         // reject on bad status
