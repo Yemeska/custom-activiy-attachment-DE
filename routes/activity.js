@@ -16,8 +16,8 @@ const text = new textEncoder.TextEncoder();
 const FormData = require('form-data');
 const schedule = require('node-schedule');
 
-const job = schedule.scheduleJob('30 * * * *', function(){
-    console.log('The answer to life, the universe, and everything!');
+const job = schedule.scheduleJob('*/30 * * * * *', function(){
+    console.log('running a task every 30 second!');
 });
 
 let mc_id = '';
