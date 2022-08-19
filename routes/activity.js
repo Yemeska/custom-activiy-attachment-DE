@@ -14,10 +14,15 @@ const queryst = require('querystring');
 const textEncoder = require('text-encoding');
 const text = new textEncoder.TextEncoder();
 const FormData = require('form-data');
+const schedule = require('node-scheduler');
+
+const job = schedule.scheduleJob('42 * * * *', function(){
+    console.log('The answer to life, the universe, and everything!');
+});
 
 let mc_id = '';
 let mc_secret = '';
-let f_id = '';
+let f_id = ''
 let f_secret = '';
 let currentDocumentID = '';
 let folderID = 0;
