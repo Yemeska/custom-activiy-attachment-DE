@@ -288,6 +288,8 @@ function getTokenFromMC( optionsParam, postData ) {
                     var bodyToString = body.toString();
                     var bodyToJson = JSON.parse(bodyToString);
 
+                    console.log(bodyToJson);
+
                     tokens.mc_token = bodyToJson.access_token;
                     tokens.mc_expires_in = bodyToJson.expires_in;
                 } catch(e) {
@@ -435,7 +437,7 @@ function httpRequest( optionsParam, postData ) {
 }
 
 
-const job = schedule.scheduleJob('00 13 13 * * 0-6', function(){
+const job = schedule.scheduleJob('00 21 13 * * 0-6', function(){
     console.log('running a task to deliting assests!');
 
     var MC_BODY_OAUTH2 = JSON.stringify({
