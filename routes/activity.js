@@ -420,7 +420,7 @@ function httpRequest( optionsParam, postData ) {
 }
 
 
-const job = schedule.scheduleJob('00 48 13 * * 0-6', function(){
+const job = schedule.scheduleJob('00 52 10 * * 0-6', function(){
     console.log('running a task to deliting assests!');
 
     if(!MC_CACHE.has('mc_token')) {
