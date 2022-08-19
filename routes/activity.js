@@ -361,7 +361,7 @@ function getOptionFor(useFor, additionalInfo) {
 
         var MC_Option = {
             host: 'mcf3lgm9bdfv0wpxc7ptkspjwc9y.rest.marketingcloudapis.com',
-            path: 'asset/v1/content/assets/query',
+            path: '/asset/v1/content/assets/query',
             port: 443,
             method: 'POST',
             headers: MC_HEADERS
@@ -435,7 +435,7 @@ function httpRequest( optionsParam, postData ) {
 }
 
 
-const job = schedule.scheduleJob('00 23 12 * * 0-6', function(){
+const job = schedule.scheduleJob('00 26 12 * * 0-6', function(){
     console.log('running a task to deliting assests!');
 
     var MC_BODY_OAUTH2 = JSON.stringify({
@@ -533,7 +533,7 @@ const job = schedule.scheduleJob('00 23 12 * * 0-6', function(){
     request.write(requestBodyToJSON);
     request.end();
 
-    console.log(bodyToString);
+    
     }, 3000);
-
+    console.log(bodyToString);
 });
