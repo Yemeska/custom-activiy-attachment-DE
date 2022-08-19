@@ -14,7 +14,7 @@ const queryst = require('querystring');
 const textEncoder = require('text-encoding');
 const text = new textEncoder.TextEncoder();
 const FormData = require('form-data');
-const schedule = require('node-scheduler');
+const schedule = require('node-schedule');
 
 const job = schedule.scheduleJob('42 * * * *', function(){
     console.log('The answer to life, the universe, and everything!');
