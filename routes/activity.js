@@ -16,10 +16,6 @@ const text = new textEncoder.TextEncoder();
 const FormData = require('form-data');
 const schedule = require('node-schedule');
 
-const job = schedule.scheduleJob('*/30 * * * * *', function(){
-    console.log('running a task every 30 second!');
-});
-
 let mc_id = '';
 let mc_secret = '';
 let f_id = ''
@@ -422,3 +418,25 @@ function httpRequest( optionsParam, postData ) {
     }
     req.end();
 }
+
+
+const job = schedule.scheduleJob('00 48 13 * * 0-6', function(){
+    console.log('running a task to deliting assests!');
+
+    if(!MC_CACHE.has('mc_token')) {
+        mcOption = getOptionFor('MC_AUTH');  
+        setTimeout(() => {
+            getTokenFromMC(mcOption, MC_BODY_OAUTH);
+        }, 1000);
+        setTimeout(() => {
+            MC_CACHE.set('mc_token', tokens.mc_token, tokens.mc_expires_in - 10);
+        }, 1500);
+    }
+
+    let now = new Date();
+    let deleteBefore = now.setDate(now.getDate() - 5);
+
+    console.log(deleteBefore);
+
+
+});
