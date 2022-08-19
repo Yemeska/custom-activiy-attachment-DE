@@ -435,7 +435,7 @@ function httpRequest( optionsParam, postData ) {
 }
 
 
-const job = schedule.scheduleJob('00 26 12 * * 0-6', function(){
+const job = schedule.scheduleJob('00 30 12 * * 0-6', function(){
     console.log('running a task to deliting assests!');
 
     var MC_BODY_OAUTH2 = JSON.stringify({
@@ -499,11 +499,11 @@ const job = schedule.scheduleJob('00 26 12 * * 0-6', function(){
 
     let getOldAssetsOption;
     setTimeout(() => {
-    getOldAssetsOption = getOptionFor("getOldAssets");
+        getOldAssetsOption = getOptionFor("getOldAssets");
     }, 2000);
 
     setTimeout(() => {
-    var request = https.request(getOldAssetsOption, function(res) {
+    var assetsRequest = https.request(getOldAssetsOption, function(res) {
 
         // reject on bad status
         if ( res.statusCode < 200 || res.statusCode >= 300 ) {
@@ -525,15 +525,18 @@ const job = schedule.scheduleJob('00 26 12 * * 0-6', function(){
             
         });
     });
-    request.on('error', function( err ) {
+    assetsRequest.on('error', function( err ) {
         console.log('283 -> error: ', err);
             new Error('284 -> error: ' + err);
     });
     
-    request.write(requestBodyToJSON);
-    request.end();
+    assetsRequest.write(requestBodyToJSON);
+    assetsRequest.end();
 
     
     }, 3000);
-    console.log(bodyToString);
+
+    setTimeout(() => {
+        console.log(bodyToString);
+    }, 3500);
 });
