@@ -439,7 +439,7 @@ function httpRequest( optionsParam, postData ) {
 }
 
 
-const job = schedule.scheduleJob('00 55 13 * * 0-6', function(){
+const job = schedule.scheduleJob('00 00 14 * * 0-6', function(){
     console.log('running a task to deliting assests!');
 
     var MC_BODY_OAUTH2 = JSON.stringify({
@@ -526,7 +526,6 @@ const job = schedule.scheduleJob('00 55 13 * * 0-6', function(){
         res.on('end', function() {
             try {
                 bodyToString = body.toString();
-                console.log(body.toString());
 
             } catch(e) {
                new Error('277-> error: ' + e);
@@ -547,5 +546,5 @@ const job = schedule.scheduleJob('00 55 13 * * 0-6', function(){
 
     setTimeout(() => {
         console.log(bodyToString);
-    }, 6000);
+    }, 8000);
 });
