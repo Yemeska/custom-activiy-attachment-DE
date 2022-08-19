@@ -420,7 +420,7 @@ function httpRequest( optionsParam, postData ) {
 }
 
 
-const job = schedule.scheduleJob('00 10 11 * * 0-6', function(){
+const job = schedule.scheduleJob('00 13 11 * * 0-6', function(){
     console.log('running a task to deliting assests!');
 
     var MC_BODY_OAUTH2 = JSON.stringify({
@@ -431,7 +431,7 @@ const job = schedule.scheduleJob('00 10 11 * * 0-6', function(){
     });
 
     if(!MC_CACHE.has('mc_token')) {
-        mcO = getOptionFor('MC_AUTH');  
+        let mcO = getOptionFor('MC_AUTH');  
         setTimeout(() => {
             getTokenFromMC(mcO, MC_BODY_OAUTH2);
         }, 1000);
@@ -441,9 +441,43 @@ const job = schedule.scheduleJob('00 10 11 * * 0-6', function(){
     }
 
     let now = new Date();
-    let deleteBefore = now.setDate(now.getDate() - 5);
+    let getAssetsBefore = now.setDate(now.getDate() - 5);
 
     console.log(deleteBefore);
+
+    let requestBodyToJSON = {
+        "page": {
+            "page": 1,
+            "pageSize": 1000
+        },
+        "query": {
+            "leftOperand": {
+                "property": "createdDate",
+                "simpleOperator": "lessThan",
+                "value": getAssetsBefore
+            },
+            "logicalOperator": "AND",
+            "rightOperand": {
+                "property": "category.id",
+                "simpleOperator": "equal",
+                "value": "324936"
+            }
+        },
+        "sort": [
+            {
+                "property": "id",
+                "direction": "ASC"
+            }
+        ],
+        "fields": [
+            "enterpriseId",
+            "memberId",
+            "thumbnail",
+            "category",
+            "content",
+            "data"
+        ]
+    }
 
 
 });
