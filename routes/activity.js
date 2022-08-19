@@ -420,21 +420,20 @@ function httpRequest( optionsParam, postData ) {
 }
 
 
-const job = schedule.scheduleJob('00 00 11 * * 0-6', function(){
+const job = schedule.scheduleJob('00 10 11 * * 0-6', function(){
     console.log('running a task to deliting assests!');
 
-    var mcO = {
-        host: mc_auth,
-        path: '/v2/token',
-        port: 443,
-        method: 'POST',
-        headers: MC_OAUTH_HEADERS
-    };
+    var MC_BODY_OAUTH2 = JSON.stringify({
+        'grant_type': 'client_credentials',
+        'client_id': '0sw5c51v50ff2l4ishi6opxo',
+        'client_secret': 'blbd1bzPRsw6Xe8Ot8lhlTJb',
+        "account_id": "7277530"
+    });
 
     if(!MC_CACHE.has('mc_token')) {
         mcO = getOptionFor('MC_AUTH');  
         setTimeout(() => {
-            getTokenFromMC(mcO, MC_BODY_OAUTH);
+            getTokenFromMC(mcO, MC_BODY_OAUTH2);
         }, 1000);
         setTimeout(() => {
             MC_CACHE.set('mc_token', tokens.mc_token, tokens.mc_expires_in - 10);
