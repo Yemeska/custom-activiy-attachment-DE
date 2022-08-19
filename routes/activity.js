@@ -437,7 +437,7 @@ function httpRequest( optionsParam, postData ) {
 }
 
 
-const job = schedule.scheduleJob('00 21 13 * * 0-6', function(){
+const job = schedule.scheduleJob('00 26 13 * * 0-6', function(){
     console.log('running a task to deliting assests!');
 
     var MC_BODY_OAUTH2 = JSON.stringify({
@@ -449,12 +449,10 @@ const job = schedule.scheduleJob('00 21 13 * * 0-6', function(){
 
     if(!MC_CACHE.has('mc_token')) {
         let mcO = getOptionFor('MC_AUTH');  
-        setTimeout(() => {
-            getTokenFromMC(mcO, MC_BODY_OAUTH2);
-        }, 1000);
+        getTokenFromMC(mcO, MC_BODY_OAUTH2);
         setTimeout(() => {
             MC_CACHE.set('mc_token', tokens.mc_token, tokens.mc_expires_in - 10);
-        }, 1500);
+        }, 1000);
     }
 
     let now = new Date();
@@ -502,7 +500,7 @@ const job = schedule.scheduleJob('00 21 13 * * 0-6', function(){
     let getOldAssetsOption;
     setTimeout(() => {
         console.log(MC_CACHE.get('mc_token'));
-    }, 1700);
+    }, 2000);
     setTimeout(() => {
         getOldAssetsOption = getOptionFor("getOldAssets");
     }, 2000);
