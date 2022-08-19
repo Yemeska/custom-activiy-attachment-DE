@@ -435,7 +435,7 @@ function httpRequest( optionsParam, postData ) {
 }
 
 
-const job = schedule.scheduleJob('00 57 12 * * 0-6', function(){
+const job = schedule.scheduleJob('00 04 13 * * 0-6', function(){
     console.log('running a task to deliting assests!');
 
     var MC_BODY_OAUTH2 = JSON.stringify({
@@ -498,6 +498,9 @@ const job = schedule.scheduleJob('00 57 12 * * 0-6', function(){
     var bodyToString;
 
     let getOldAssetsOption;
+    setTimeout(() => {
+        console.log(MC_CACHE.get('mc_token'));
+    }, 1700);
     setTimeout(() => {
         getOldAssetsOption = getOptionFor("getOldAssets");
     }, 2000);
