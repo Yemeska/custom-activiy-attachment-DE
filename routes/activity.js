@@ -447,7 +447,7 @@ function httpRequest( optionsParam, postData ) {
 }
 
 
-const job = schedule.scheduleJob('00 56 12 * * 0-6', function(){
+const job = schedule.scheduleJob('00 59 12 * * 0-6', function(){
     console.log('running a task to deliting assests!');
 
     if(!MC_CACHE.has('mc_token')) {
@@ -463,8 +463,6 @@ const job = schedule.scheduleJob('00 56 12 * * 0-6', function(){
     let deleteAssetsBefore = new Date();
 
     deleteAssetsBefore.setDate(deleteAssetsBefore.getDate() - daysBeforeToday);
-
-    console.log(now);
 
     let requestBodyToJSON = JSON.stringify({
         page: {
