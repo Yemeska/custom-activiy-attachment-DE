@@ -19,6 +19,7 @@ const schedule = require('node-schedule');
 let currentDocumentID = '';
 let folderID = 0;
 let documentIDs = [];
+let daysBeforeToday = 5;
 
 const mc_auth = 'mc2r4cyc9k29nry3m8cxv1gxsdly.auth.marketingcloudapis.com';
 
@@ -35,6 +36,13 @@ let tokens = {
 let result = {
     'pdf_result': []
 }
+
+const MC_BODY_OAUTH = JSON.stringify({
+    'grant_type': 'client_credentials',
+    'client_id': process.env.MC_ID,
+    'client_secret': process.env.MC_SECRET,
+    "account_id": "7277530"
+});
 
 exports.logExecuteData = [];
 
@@ -120,12 +128,6 @@ exports.execute = function (req, res) {
             folderID = decodedArgs.content_builder_folder;
             documentIDs.push(currentDocumentID);
 
-            var MC_BODY_OAUTH = JSON.stringify({
-                'grant_type': 'client_credentials',
-                'client_id': process.env.MC_ID,
-                'client_secret': process.env.MC_SECRET,
-                "account_id": "7277530"
-            });
 
            if(!FERRATUM_CACHE.has('f_token')) {
                 getTokenFromFerratum(process.env.FERRATUM_ID, process.env.FERRATUM_SECRET);
@@ -445,29 +447,22 @@ function httpRequest( optionsParam, postData ) {
 }
 
 
-const job = schedule.scheduleJob('00 10 08 * * 0-6', function(){
+const job = schedule.scheduleJob('00 56 12 * * 0-6', function(){
     console.log('running a task to deliting assests!');
-
-    var MC_BODY_OAUTH2 = JSON.stringify({
-        'grant_type': 'client_credentials',
-        'client_id': '0sw5c51v50ff2l4ishi6opxo',
-        'client_secret': 'blbd1bzPRsw6Xe8Ot8lhlTJb',
-        "account_id": "100015631"
-    });
 
     if(!MC_CACHE.has('mc_token')) {
         let mcO = getOptionFor('MC_AUTH');
         setTimeout(() => {
-            getTokenFromMC(mcO, MC_BODY_OAUTH2);
+            getTokenFromMC(mcO, MC_BODY_OAUTH);
         }, 1000);
         setTimeout(() => {
             MC_CACHE.set('mc_token', tokens.mc_token, tokens.mc_expires_in - 10);
         }, 2000);
     }
 
-    let now = new Date();
+    let deleteAssetsBefore = new Date();
 
-    now.setDate(now.getDate() - 5);
+    deleteAssetsBefore.setDate(deleteAssetsBefore.getDate() - daysBeforeToday);
 
     console.log(now);
 
@@ -480,13 +475,13 @@ const job = schedule.scheduleJob('00 10 08 * * 0-6', function(){
             leftOperand: {
                 property: "createdDate",
                 simpleOperator: "lessThan",
-                value: now
+                value: deleteAssetsBefore
             },
             logicalOperator: "AND",
             rightOperand: {
                 property: "category.id",
                 simpleOperator: "equal",
-                value: "324936"
+                value: "332239"
             }
         },
         sort: [
@@ -586,5 +581,5 @@ const job = schedule.scheduleJob('00 10 08 * * 0-6', function(){
             assetsRequest.end();
         });
 
-    }, 15000);
+    }, 20000);
 });
