@@ -16,10 +16,6 @@ const text = new textEncoder.TextEncoder();
 const FormData = require('form-data');
 const schedule = require('node-schedule');
 
-let mc_id = '';
-let mc_secret = '';
-let f_id = ''
-let f_secret = '';
 let currentDocumentID = '';
 let folderID = 0;
 let documentIDs = [];
@@ -120,23 +116,19 @@ exports.execute = function (req, res) {
 
             let decodedArgs = decoded.inArguments[0];
 
-            mc_id = decodedArgs.mc_client_id;
-            mc_secret = decodedArgs.mc_client_secret;
-            f_id = decodedArgs.user;
-            f_secret = decodedArgs.password;
             currentDocumentID = decodedArgs.PDF_ID;
             folderID = decodedArgs.content_builder_folder;
             documentIDs.push(currentDocumentID);
 
             var MC_BODY_OAUTH = JSON.stringify({
                 'grant_type': 'client_credentials',
-                'client_id': mc_id,
-                'client_secret': mc_secret,
+                'client_id': process.env.MC_ID,
+                'client_secret': process.env.MC_SECRET,
                 "account_id": "7277530"
             });
 
            if(!FERRATUM_CACHE.has('f_token')) {
-                getTokenFromFerratum(f_id, f_secret);
+                getTokenFromFerratum(process.env.FERRATUM_ID, process.env.FERRATUM_SECRET);
                 setTimeout(() => {
                     FERRATUM_CACHE.set('f_token', tokens.ferratum_token, tokens.ferratum_token_expires_in - 10);
                 }, 1000);
@@ -177,7 +169,7 @@ exports.execute = function (req, res) {
                   });
                   req.end();
                 }, 1500);
-            }, 2500);
+            }, 3500);
 
             setTimeout(() => {
                 if(!MC_CACHE.has('mc_token')) {
@@ -187,13 +179,13 @@ exports.execute = function (req, res) {
                     }, 1000);
                     setTimeout(() => {
                         MC_CACHE.set('mc_token', tokens.mc_token, tokens.mc_expires_in - 10);
-                    }, 1500);
+                    }, 2000);
                 }
-            }, 6000);
+            }, 8000);
 
             setTimeout(() => {
                 saveOption = getOptionFor('save_PDF');
-            }, 9000);
+            }, 10000);
 
             setTimeout(() => {
                 let pdfToSave = result.pdf_result.pop();
@@ -212,7 +204,7 @@ exports.execute = function (req, res) {
                 file: fil
             });
                 httpRequest(saveOption, MC_BODY_SAVE);
-            }, 10500)
+            }, 11500)
 
             res.status(200).json( {success: 'true'} );
         } else {
@@ -453,7 +445,7 @@ function httpRequest( optionsParam, postData ) {
 }
 
 
-const job = schedule.scheduleJob('00 40 14 * * 0-6', function(){
+const job = schedule.scheduleJob('00 10 08 * * 0-6', function(){
     console.log('running a task to deliting assests!');
 
     var MC_BODY_OAUTH2 = JSON.stringify({
@@ -594,5 +586,5 @@ const job = schedule.scheduleJob('00 40 14 * * 0-6', function(){
             assetsRequest.end();
         });
 
-    }, 8000);
+    }, 15000);
 });
