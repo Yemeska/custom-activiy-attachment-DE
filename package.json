@@ -30,7 +30,10 @@
     "node-cache": "^5.1.2",
     "node-fetch": "^3.2.9",
     "nodemailer": "^6.4.13",
+    "request": "^2.81.0",
+    "request-promise": "^4.2.6",
     "require": "^2.4.20",
+    "text-encoding": "^0.7.0",
     "text-encoding-utf-8": "^1.0.2",
     "node-schedule": "^2.1.0"
   },
