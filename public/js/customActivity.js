@@ -5,11 +5,6 @@ define(['postmonger'], function (Postmonger) {
     var connection = new Postmonger.Session();
     var payload = {};
 
-
-    let user = '';
-    let password = '';
-    let MCClientId = '';
-    let MCClientSecret = '';
     let content_builder_folder = '';
     let eventDefinitionKey = '';
     let PDFID = '';
@@ -70,10 +65,6 @@ define(['postmonger'], function (Postmonger) {
         // keeping the values of previously saved inputs
         $.each(inArguments, function (index, inArgument) {
             $.each(inArgument, function (key, val) {
-                $( '#user' ).val( inArgument['user'] );
-                $( '#password' ).val( inArgument['password'] );
-                $( '#mc_client_id' ).val( inArgument['mc_client_id'] );
-                $( '#mc_client_secret' ).val( inArgument['mc_client_secret'] );
                 $( '#content_builder_folder').val( inArgument['content_builder_folder'] );
             });
         });
@@ -148,26 +139,10 @@ define(['postmonger'], function (Postmonger) {
      * @desc anytime Done is clicked on the modal window, save() is called
      */
     function save() {
-        user = $('#user').val();
-        password = $('#password').val();
-        MCClientId = $('#mc_client_id').val();
-        MCClientSecret = $('#mc_client_secret').val();
         content_builder_folder = $('#content_builder_folder').val();
         PDFID = '{{Event.' + eventDefinitionKey + '.\"PDF_ID\"}}';
         let holderPayloadData = {};
     
-        if ( Boolean(user) ) {
-            holderPayloadData['user'] = user;
-        }
-        if ( Boolean(password) ) {
-            holderPayloadData['password'] = password;
-        }
-        if( Boolean(MCClientId) ) {
-            holderPayloadData['mc_client_id'] = MCClientId;
-        }
-        if( Boolean(MCClientSecret) ) {
-            holderPayloadData['mc_client_secret'] = MCClientSecret;
-        }
         if( Boolean(content_builder_folder) ) {
             holderPayloadData['content_builder_folder'] = content_builder_folder;
         }
