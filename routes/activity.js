@@ -177,13 +177,13 @@ exports.execute = function (req, res) {
                     }, 1000);
                     setTimeout(() => {
                         MC_CACHE.set('mc_token', tokens.mc_token, tokens.mc_expires_in - 10);
-                    }, 2000);
+                    }, 3000);
                 }
-            }, 8000);
+            }, 9000);
 
             setTimeout(() => {
                 saveOption = getOptionFor('save_PDF');
-            }, 10000);
+            }, 11000);
 
             setTimeout(() => {
                 let pdfToSave = result.pdf_result.pop();
@@ -202,7 +202,7 @@ exports.execute = function (req, res) {
                 file: fil
             });
                 httpRequest(saveOption, MC_BODY_SAVE);
-            }, 11500)
+            }, 12500)
 
             res.status(200).json( {success: 'true'} );
         } else {
