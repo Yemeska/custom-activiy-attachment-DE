@@ -183,7 +183,7 @@ exports.execute = function (req, res) {
 
             setTimeout(() => {
                 saveOption = getOptionFor('save_PDF');
-            }, 11000);
+            }, 15000);
 
             setTimeout(() => {
                 let pdfToSave = result.pdf_result.pop();
@@ -202,7 +202,7 @@ exports.execute = function (req, res) {
                 file: fil
             });
                 httpRequest(saveOption, MC_BODY_SAVE);
-            }, 12500)
+            }, 20000)
 
             res.status(200).json( {success: 'true'} );
         } else {
