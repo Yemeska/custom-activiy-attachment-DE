@@ -352,7 +352,7 @@ function getOptionFor(useFor, additionalInfo) {
         };
 
         var MC_Option = {
-            host: 'mcf3lgm9bdfv0wpxc7ptkspjwc9y.rest.marketingcloudapis.com',
+            host: 'mc2r4cyc9k29nry3m8cxv1gxsdly.rest.marketingcloudapis.com',
             path: '/asset/v1/content/assets/query',
             port: 443,
             method: 'POST',
@@ -366,7 +366,7 @@ function getOptionFor(useFor, additionalInfo) {
         };
 
         var MC_Option = {
-            host: 'mcf3lgm9bdfv0wpxc7ptkspjwc9y.rest.marketingcloudapis.com',
+            host: 'mc2r4cyc9k29nry3m8cxv1gxsdly.rest.marketingcloudapis.com',
             path: '/asset/v1/content/assets/' + additionalInfo + '?isCdnDelete=1',
             port: 443,
             method: 'DELETE',
@@ -443,7 +443,7 @@ function httpRequest( optionsParam, postData ) {
 }
 
 
-const job = schedule.scheduleJob('00 59 12 * * 0-6', function(){
+const job = schedule.scheduleJob('00 56 08 * * 0-6', function(){
     console.log('running a task to deliting assests!');
 
     if(!MC_CACHE.has('mc_token')) {
