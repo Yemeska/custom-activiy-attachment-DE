@@ -16,6 +16,7 @@ let currentDocumentID = '';
 let folderID = 0;
 let documentIDs = [];
 let daysBeforeToday = 5;
+let folderIDToDeleteAssets = "332239";
 
 const mc_auth = 'mc2r4cyc9k29nry3m8cxv1gxsdly.auth.marketingcloudapis.com';
 
@@ -443,7 +444,7 @@ function httpRequest( optionsParam, postData ) {
 }
 
 
-const job = schedule.scheduleJob('00 56 08 * * 0-6', function(){
+const job = schedule.scheduleJob('00 00 02 * * 0-6', function(){
     console.log('running a task to deliting assests!');
 
     if(!MC_CACHE.has('mc_token')) {
@@ -475,7 +476,7 @@ const job = schedule.scheduleJob('00 56 08 * * 0-6', function(){
             rightOperand: {
                 property: "category.id",
                 simpleOperator: "equal",
-                value: "332239"
+                value: folderIDToDeleteAssets
             }
         },
         sort: [
