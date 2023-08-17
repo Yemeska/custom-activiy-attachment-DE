@@ -400,6 +400,7 @@ function getTokenFromFerratum(id, secret){
 
                     tokens.ferratum_token = bodyToJson.access_token
                     tokens.ferratum_token_expires_in = bodyToJson.expires_in;
+                    console.log(ferratum_token)
                 });
               })
 
