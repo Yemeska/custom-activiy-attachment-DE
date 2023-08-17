@@ -140,7 +140,9 @@ define(['postmonger'], function (Postmonger) {
      */
     function save() {
         content_builder_folder = $('#content_builder_folder').val();
-        PDFID = '{{Event.' + eventDefinitionKey + '.\"PDF_ID\"}}';
+       // PDFID = '{{Event.' + eventDefinitionKey + '.\"PDF_ID\"}}';
+       PDFID = "{{Contact.keepLeadfor1year.PDF_ID}}";
+      
         let holderPayloadData = {};
     
         if( Boolean(content_builder_folder) ) {
