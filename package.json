@@ -3,7 +3,7 @@
   "version": "1.0.0",
   "description": "Next Consult Custom Activity",
   "engines": {
-    "node": "6.11.1"
+    "node": "13.14.0"
   },
   "scripts": {
     "start": "node app.js"
