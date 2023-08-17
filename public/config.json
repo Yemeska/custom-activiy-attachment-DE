@@ -1,5 +1,6 @@
 {
     "workflowApiVersion": "1.0",
+    "key": "2f524d08-cdb0-42f5-935d-4a9ad3fcb016",
     "metaData": {
         "icon": "images/data.png",
         "iconSmall": "",
@@ -27,7 +28,7 @@
         }
     },
     "configurationArguments": {
-      "applicationExtensionKey": "d8ab3547-fb1f-4179-81ef-528f8ea8b416",
+      "applicationExtensionKey": "2f524d08-cdb0-42f5-935d-4a9ad3fcb016",
       "save": {
         "url": "https://customactiviyferratum-e98416ab3d2f.herokuapp.com/journeybuilder/save",
         "verb": "POST",
