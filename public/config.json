@@ -17,7 +17,7 @@
         "execute": {
           "inArguments":[],
           "outArguments": [],
-          "url": "https://customactiviyferratum-e98416ab3d2f.herokuapp.com/journey/execute",
+          "url": "https://customactiviyferratum-e98416ab3d2f.herokuapp.com/journeybuilder/execute",
           "verb": "POST",
           "body": "",
           "header": "",
@@ -29,22 +29,22 @@
     "configurationArguments": {
       "applicationExtensionKey": "d8ab3547-fb1f-4179-81ef-528f8ea8b416",
       "save": {
-        "url": "https://customactiviyferratum-e98416ab3d2f.herokuapp.com/journey/save",
+        "url": "https://customactiviyferratum-e98416ab3d2f.herokuapp.com/journeybuilder/save",
         "verb": "POST",
         "useJwt": true
        },
        "publish": {
-        "url": "https://customactiviyferratum-e98416ab3d2f.herokuapp.com/journey/publish",
+        "url": "https://customactiviyferratum-e98416ab3d2f.herokuapp.com/journeybuilder/publish",
         "verb": "POST",
         "useJwt": true
        },
       "stop": {
-        "url": "https://customactiviyferratum-e98416ab3d2f.herokuapp.com/journey/stop",
+        "url": "https://customactiviyferratum-e98416ab3d2f.herokuapp.com/journeybuilder/stop",
         "verb": "POST",
         "useJwt": true
       },
       "validate": {
-        "url": "https://customactiviyferratum-e98416ab3d2f.herokuapp.com/journey/validate",
+        "url": "https://customactiviyferratum-e98416ab3d2f.herokuapp.com/journeybuilder/validate",
         "verb": "POST",
         "useJwt": true
       }
