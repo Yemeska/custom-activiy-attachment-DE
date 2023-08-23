@@ -9,8 +9,8 @@
     "type": "REST",
     "lang": {
         "en-US": {
-            "name": "Retrieve PDF",
-          "description": "Custom Activity for retrive pdf files",
+            "name": "DE Retrieve PDF",
+          "description": "Custom Activity for retrive pdf files from",
           "step1Label": "Configure Activity"
         }
     },
