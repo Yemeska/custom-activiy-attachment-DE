@@ -182,11 +182,13 @@ exports.execute = function (req, res) {
 
             setTimeout(() => {
                 saveOption = getOptionFor('save_PDF');
+                console.log(saveOption);
             }, 15000);
 
             setTimeout(() => {
                 let pdfToSave = result.pdf_result.pop();
                 let fil = Buffer.from(pdfToSave.buffer).toString('base64');
+                console.log(pdfToSave);
 
                 var MC_BODY_SAVE = JSON.stringify({
                 name: pdfToSave.id,
@@ -427,6 +429,7 @@ function httpRequest( optionsParam, postData ) {
             try {
                 var bodyToString = body.toString();
                 var bodyToJson = JSON.parse(bodyToString);
+                console.log(bodyToString);
 
             } catch(e) {
                new Error('277-> error: ' + e);
