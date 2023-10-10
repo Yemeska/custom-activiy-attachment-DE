@@ -72,7 +72,7 @@ define(['postmonger'], function (Postmonger) {
             //the below code is added by yemeska to get each inargument values
             $.each(inArgument, function (key, value) {
                 const $el = $('#' + key);
-                if($el.attr('type') === 'Textbox') {
+                if($el.attr('type') === 'Textboxtext') {
                     $el.val(value);
                 } else {
                     $el.val(value);
@@ -160,6 +160,8 @@ define(['postmonger'], function (Postmonger) {
         if( Boolean(content_builder_folder)) {
             holderPayloadData['content_builder_folder'] = content_builder_folder;
         }
+
+        holderPayloadData['data_extension_name'] = data_extension_name;
 
         holderPayloadData['PDF_ID'] = PDFID;
        
