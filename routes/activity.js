@@ -278,6 +278,7 @@ function getTokenFromMC( optionsParam, postData ) {
                     var bodyToJson = JSON.parse(bodyToString);
 
                     console.log(bodyToJson);
+                    console.log(bodyToString);
 
                     tokens.mc_token = bodyToJson.access_token;
                     tokens.mc_expires_in = bodyToJson.expires_in;
@@ -401,6 +402,7 @@ function getTokenFromFerratum(id, secret){
                     tokens.ferratum_token = bodyToJson.access_token
                     tokens.ferratum_token_expires_in = bodyToJson.expires_in;
                     console.log(tokens.ferratum_token)
+                    console.log(bodyToStr)
                 });
               })
 
