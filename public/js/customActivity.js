@@ -6,6 +6,7 @@ define(['postmonger'], function (Postmonger) {
     var payload = {};
 
     let content_builder_folder = '';
+    let data_extension_name = '';
     let eventDefinitionKey = '';
     let PDFID = '';
     let activityID = '';
@@ -66,6 +67,7 @@ define(['postmonger'], function (Postmonger) {
         $.each(inArguments, function (index, inArgument) {
             $.each(inArgument, function (key, val) {
                 $( '#content_builder_folder').val( inArgument['content_builder_folder'] );
+                $( '#data_extension_name').val( inArgument['data_extension_name'] );
             });
         });
         
@@ -140,8 +142,9 @@ define(['postmonger'], function (Postmonger) {
      */
     function save() {
         content_builder_folder = $('#content_builder_folder').val();
+        data_extension_name = $('#data_extension_name').val();
        // PDFID = '{{Event.' + eventDefinitionKey + '.\"PDF_ID\"}}';
-       PDFID = "{{Contact.Attribute.Yemesk_Tesst_Account.PDF_ID}}";
+       PDFID = "{{Contact.Attribute.data_extension_name.PDF_ID}}";
       
         let holderPayloadData = {};
     
