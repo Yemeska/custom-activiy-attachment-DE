@@ -72,7 +72,7 @@ define(['postmonger'], function (Postmonger) {
             //the below code is added by yemeska to get each inargument values
             $.each(inArgument, function (key, value) {
                 const $el = $('#' + key);
-                if($el.attr('type') === 'text') {
+                if($el.attr('type') === 'Textbox') {
                     $el.val(value);
                 } else {
                     $el.val(value);
@@ -157,10 +157,8 @@ define(['postmonger'], function (Postmonger) {
        console.log(data_extension_name);
         let holderPayloadData = {};
     
-        if( Boolean(content_builder_folder) && Boolean(data_extension_name) ) {
+        if( Boolean(content_builder_folder)) {
             holderPayloadData['content_builder_folder'] = content_builder_folder;
-            //the below line of code is added by yemeska
-            holderPayloadData['data_extension_name'] = data_extension_name;
         }
 
         holderPayloadData['PDF_ID'] = PDFID;
