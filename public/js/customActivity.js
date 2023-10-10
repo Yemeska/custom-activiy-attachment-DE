@@ -161,7 +161,7 @@ define(['postmonger'], function (Postmonger) {
             holderPayloadData['content_builder_folder'] = content_builder_folder;
         }
 
-       // holderPayloadData['data_extension_name'] = data_extension_name;
+       holderPayloadData['data_extension_name'] = data_extension_name;
 
         holderPayloadData['PDF_ID'] = PDFID;
        
