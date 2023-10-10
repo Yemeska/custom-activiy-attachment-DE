@@ -152,8 +152,8 @@ define(['postmonger'], function (Postmonger) {
     function save() {
         content_builder_folder = $('#content_builder_folder').val();
         data_extension_name = $('#data_extension_name').val();
-       // PDFID = '{{Event.' + eventDefinitionKey + '.\"PDF_ID\"}}';
-       PDFID = "{{Contact.Attribute.data_extension_name.PDF_ID}}";
+        //PDFID = '{{Event.' + eventDefinitionKey + '.\"PDF_ID\"}}';
+       PDFID = '{{Contact.Attribute.' + data_extension_name + '.PDF_ID}}';
        console.log(data_extension_name);
         let holderPayloadData = {};
     
@@ -161,7 +161,7 @@ define(['postmonger'], function (Postmonger) {
             holderPayloadData['content_builder_folder'] = content_builder_folder;
         }
 
-        holderPayloadData['data_extension_name'] = data_extension_name;
+       // holderPayloadData['data_extension_name'] = data_extension_name;
 
         holderPayloadData['PDF_ID'] = PDFID;
        
