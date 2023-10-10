@@ -65,9 +65,18 @@ define(['postmonger'], function (Postmonger) {
 
         // keeping the values of previously saved inputs
         $.each(inArguments, function (index, inArgument) {
-            $.each(inArgument, function (key, val) {
+           /* $.each(inArgument, function (key, val) {
                 $( '#content_builder_folder').val( inArgument['content_builder_folder'] );
                 $( '#data_extension_name').val( inArgument['data_extension_name'] );
+            });*/
+            //the below code is added by yemeska to get each inargument values
+            $.each(inArgument, function (key, value) {
+                const $el = $('#' + key);
+                if($el.attr('type') === 'text') {
+                    $el.val(value);
+                } else {
+                    $el.val(value);
+                }
             });
         });
         
@@ -145,21 +154,24 @@ define(['postmonger'], function (Postmonger) {
         data_extension_name = $('#data_extension_name').val();
        // PDFID = '{{Event.' + eventDefinitionKey + '.\"PDF_ID\"}}';
        PDFID = "{{Contact.Attribute.data_extension_name.PDF_ID}}";
-      
+       console.log(data_extension_name);
         let holderPayloadData = {};
     
-        if( Boolean(content_builder_folder) ) {
+        if( Boolean(content_builder_folder) && Boolean(data_extension_name) ) {
             holderPayloadData['content_builder_folder'] = content_builder_folder;
+            //the below line of code is added by yemeska
+            holderPayloadData['data_extension_name'] = data_extension_name;
         }
 
         holderPayloadData['PDF_ID'] = PDFID;
+       
 
         payload['arguments'].execute.inArguments = [{}];
 
         payload['arguments'].execute.inArguments[0] = holderPayloadData;
 
         payload['metaData'].isConfigured = true;
-     
+        console.log(holderPayloadData);
         connection.trigger('updateActivity', payload);
     }
 });
