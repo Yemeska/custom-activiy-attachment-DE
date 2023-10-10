@@ -125,7 +125,7 @@ exports.execute = function (req, res) {
 
 
            if(!FERRATUM_CACHE.has('f_token')) {
-                getTokenFromFerratum(process.env.FERRATUM_ID, process.env.FERRATUM_SECRET);
+                getTokenFromFerratum(process.env.FERRATUM_ID, decodeURIComponent(process.env.FERRATUM_SECRET));
                 setTimeout(() => {
                     FERRATUM_CACHE.set('f_token', tokens.ferratum_token, tokens.ferratum_token_expires_in - 10);
                 }, 1000);
