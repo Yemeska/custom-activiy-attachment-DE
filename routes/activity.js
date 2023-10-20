@@ -125,7 +125,7 @@ exports.execute = function (req, res) {
 
 
            if(!FERRATUM_CACHE.has('f_token')) {
-                getTokenFromFerratum(process.env.FERRATUM_ID, process.env.FERRATUM_SECRET);
+                getTokenFromFerratum(process.env.FERRATUM_ID, decodeURIComponent(process.env.FERRATUM_SECRET));
                 setTimeout(() => {
                     FERRATUM_CACHE.set('f_token', tokens.ferratum_token, tokens.ferratum_token_expires_in - 10);
                 }, 1000);
@@ -182,11 +182,13 @@ exports.execute = function (req, res) {
 
             setTimeout(() => {
                 saveOption = getOptionFor('save_PDF');
+                console.log(saveOption);
             }, 15000);
 
             setTimeout(() => {
                 let pdfToSave = result.pdf_result.pop();
                 let fil = Buffer.from(pdfToSave.buffer).toString('base64');
+                console.log(pdfToSave);
 
                 var MC_BODY_SAVE = JSON.stringify({
                 name: pdfToSave.id,
@@ -278,6 +280,7 @@ function getTokenFromMC( optionsParam, postData ) {
                     var bodyToJson = JSON.parse(bodyToString);
 
                     console.log(bodyToJson);
+                    console.log(bodyToString);
 
                     tokens.mc_token = bodyToJson.access_token;
                     tokens.mc_expires_in = bodyToJson.expires_in;
@@ -401,6 +404,7 @@ function getTokenFromFerratum(id, secret){
                     tokens.ferratum_token = bodyToJson.access_token
                     tokens.ferratum_token_expires_in = bodyToJson.expires_in;
                     console.log(tokens.ferratum_token)
+                    console.log(bodyToStr)
                 });
               })
 
@@ -425,6 +429,7 @@ function httpRequest( optionsParam, postData ) {
             try {
                 var bodyToString = body.toString();
                 var bodyToJson = JSON.parse(bodyToString);
+                console.log(bodyToString);
 
             } catch(e) {
                new Error('277-> error: ' + e);
